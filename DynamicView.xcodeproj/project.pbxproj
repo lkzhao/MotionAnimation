@@ -7,14 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9F5D0BC839980536949811FF /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D6BAC75291D93DBC450FB9F /* libPods.a */; };
 		A34917161C4AC8E0008701E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34917151C4AC8E0008701E2 /* AppDelegate.swift */; };
 		A34917181C4AC8E0008701E2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34917171C4AC8E0008701E2 /* ViewController.swift */; };
 		A349171B1C4AC8E0008701E2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A34917191C4AC8E0008701E2 /* Main.storyboard */; };
 		A349171D1C4AC8E0008701E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A349171C1C4AC8E0008701E2 /* Assets.xcassets */; };
 		A34917201C4AC8E0008701E2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A349171E1C4AC8E0008701E2 /* LaunchScreen.storyboard */; };
+		A349172A1C4C3EA7008701E2 /* MotionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34917291C4C3EA7008701E2 /* MotionAnimator.swift */; };
+		A349172C1C4C4C20008701E2 /* MotionAnimatorTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A349172B1C4C4C20008701E2 /* MotionAnimatorTestViewController.swift */; };
+		A34917321C4C8EEA008701E2 /* MotionAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34917311C4C8EEA008701E2 /* MotionAnimation.swift */; };
+		A34917341C4C8F05008701E2 /* SpringValueAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34917331C4C8F05008701E2 /* SpringValueAnimation.swift */; };
+		A34917381C4CA832008701E2 /* NSObject+MotionAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34917371C4CA832008701E2 /* NSObject+MotionAnimation.swift */; };
+		A349173A1C4CC5D1008701E2 /* CGPoint+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34917391C4CC5D1008701E2 /* CGPoint+Util.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3D6BAC75291D93DBC450FB9F /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		7BF7D7F9D0B84205946C6B77 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		A34917121C4AC8E0008701E2 /* DynamicView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DynamicView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A34917151C4AC8E0008701E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A34917171C4AC8E0008701E2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +31,14 @@
 		A349171C1C4AC8E0008701E2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A349171F1C4AC8E0008701E2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A34917211C4AC8E0008701E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A34917291C4C3EA7008701E2 /* MotionAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionAnimator.swift; sourceTree = "<group>"; };
+		A349172B1C4C4C20008701E2 /* MotionAnimatorTestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionAnimatorTestViewController.swift; sourceTree = "<group>"; };
+		A349172D1C4C5B89008701E2 /* DynamicView-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DynamicView-Bridging-Header.h"; sourceTree = "<group>"; };
+		A34917311C4C8EEA008701E2 /* MotionAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionAnimation.swift; sourceTree = "<group>"; };
+		A34917331C4C8F05008701E2 /* SpringValueAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpringValueAnimation.swift; sourceTree = "<group>"; };
+		A34917371C4CA832008701E2 /* NSObject+MotionAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSObject+MotionAnimation.swift"; sourceTree = "<group>"; };
+		A34917391C4CC5D1008701E2 /* CGPoint+Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+Util.swift"; sourceTree = "<group>"; };
+		F18D9428EA90888FB6C25A21 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +46,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F5D0BC839980536949811FF /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		09ACA85C5E0212843C1A878E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3D6BAC75291D93DBC450FB9F /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		A34917091C4AC8E0008701E2 = {
 			isa = PBXGroup;
 			children = (
 				A34917141C4AC8E0008701E2 /* DynamicView */,
 				A34917131C4AC8E0008701E2 /* Products */,
+				A787263453F9D12D488E3A80 /* Pods */,
+				09ACA85C5E0212843C1A878E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,14 +82,38 @@
 		A34917141C4AC8E0008701E2 /* DynamicView */ = {
 			isa = PBXGroup;
 			children = (
+				A349173B1C4CC965008701E2 /* MotionAnimation */,
 				A34917151C4AC8E0008701E2 /* AppDelegate.swift */,
 				A34917171C4AC8E0008701E2 /* ViewController.swift */,
+				A349172B1C4C4C20008701E2 /* MotionAnimatorTestViewController.swift */,
 				A34917191C4AC8E0008701E2 /* Main.storyboard */,
 				A349171C1C4AC8E0008701E2 /* Assets.xcassets */,
 				A349171E1C4AC8E0008701E2 /* LaunchScreen.storyboard */,
 				A34917211C4AC8E0008701E2 /* Info.plist */,
+				A349172D1C4C5B89008701E2 /* DynamicView-Bridging-Header.h */,
 			);
 			path = DynamicView;
+			sourceTree = "<group>";
+		};
+		A349173B1C4CC965008701E2 /* MotionAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				A34917291C4C3EA7008701E2 /* MotionAnimator.swift */,
+				A34917311C4C8EEA008701E2 /* MotionAnimation.swift */,
+				A34917391C4CC5D1008701E2 /* CGPoint+Util.swift */,
+				A34917331C4C8F05008701E2 /* SpringValueAnimation.swift */,
+				A34917371C4CA832008701E2 /* NSObject+MotionAnimation.swift */,
+			);
+			name = MotionAnimation;
+			sourceTree = "<group>";
+		};
+		A787263453F9D12D488E3A80 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F18D9428EA90888FB6C25A21 /* Pods.debug.xcconfig */,
+				7BF7D7F9D0B84205946C6B77 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +123,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A34917241C4AC8E0008701E2 /* Build configuration list for PBXNativeTarget "DynamicView" */;
 			buildPhases = (
+				FA6939D8F0080996D5458999 /* Check Pods Manifest.lock */,
 				A349170E1C4AC8E0008701E2 /* Sources */,
 				A349170F1C4AC8E0008701E2 /* Frameworks */,
 				A34917101C4AC8E0008701E2 /* Resources */,
+				5388ABC5545B4091A7358CA6 /* Embed Pods Frameworks */,
+				66450F1927BDC797254BDD4C /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -130,12 +185,66 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		5388ABC5545B4091A7358CA6 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		66450F1927BDC797254BDD4C /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FA6939D8F0080996D5458999 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		A349170E1C4AC8E0008701E2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A34917321C4C8EEA008701E2 /* MotionAnimation.swift in Sources */,
+				A349173A1C4CC5D1008701E2 /* CGPoint+Util.swift in Sources */,
+				A34917341C4C8F05008701E2 /* SpringValueAnimation.swift in Sources */,
+				A349172A1C4C3EA7008701E2 /* MotionAnimator.swift in Sources */,
+				A34917381C4CA832008701E2 /* NSObject+MotionAnimation.swift in Sources */,
 				A34917181C4AC8E0008701E2 /* ViewController.swift in Sources */,
+				A349172C1C4C4C20008701E2 /* MotionAnimatorTestViewController.swift in Sources */,
 				A34917161C4AC8E0008701E2 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -247,23 +356,30 @@
 		};
 		A34917251C4AC8E0008701E2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F18D9428EA90888FB6C25A21 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = DynamicView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lkzhao.DynamicView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "DynamicView/DynamicView-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		A34917261C4AC8E0008701E2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7BF7D7F9D0B84205946C6B77 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = DynamicView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lkzhao.DynamicView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "DynamicView/DynamicView-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -286,6 +402,7 @@
 				A34917261C4AC8E0008701E2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
