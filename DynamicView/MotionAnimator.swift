@@ -39,6 +39,8 @@ class MotionAnimator: NSObject {
     for b in pendingStopAnimations{
       if let index = animations.indexOf(b){
         animations.removeAtIndex(index)
+        b.delegate?.animationDidStop(b)
+        b.onCompletion?(animation: b)
       }
     }
 

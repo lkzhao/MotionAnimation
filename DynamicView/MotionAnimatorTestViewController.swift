@@ -10,7 +10,6 @@ import UIKit
 
 class MotionAnimatorTestViewController: UIViewController {
 
-  var springBehavior:SpringMultiValueAnimation!
   var useMotion = true
   var v:UIView!
 
@@ -22,13 +21,7 @@ class MotionAnimatorTestViewController: UIViewController {
     
     if useMotion{
       MotionAnimator.sharedInstance.debugEnabled = true
-      springBehavior = SpringMultiValueAnimation(getter: { () -> [CGFloat] in
-          return [self.v.center.x, self.v.center.y]
-        }, setter: { (newCenter) -> Void in
-          self.v.center = CGPointMake(newCenter[0], newCenter[1])
-        }, target: [125, 225])
-      springBehavior.k = 200
-      springBehavior.b = 10
+      v.m_animate("center", toPoint: view.center, stiffness: 200, damping: 10)
     }else{
       let anim = POPSpringAnimation(propertyNamed: kPOPLayerPosition)
       anim.toValue = NSValue(CGPoint:CGPointMake(125, 425))
@@ -43,15 +36,16 @@ class MotionAnimatorTestViewController: UIViewController {
     view.addGestureRecognizer(tap)
     
 //    NSTimer.schedule(repeatInterval: 0.5) { (_) -> Void in
-//      self.test()
+//      self.testLoop()
 //    }
+    testChainingAnimation()
   }
   
   var usingPointA = false
-  func test(){
+  func testLoop(){
     let p = usingPointA ? CGPointMake(0,0):view.center
     if useMotion{
-      springBehavior.target = [p.x, p.y]
+      v.m_animate("center", toPoint: p)
     }else{
       if let anim = v.layer.pop_animationForKey("posn") as? POPSpringAnimation {
         anim.toValue = NSValue(CGPoint:p)
@@ -64,10 +58,22 @@ class MotionAnimatorTestViewController: UIViewController {
     }
     usingPointA = !usingPointA
   }
+  func testChainingAnimation(){
+    self.v.m_animate("center", toPoint: CGPointMake(255,255)) {
+      print("moved to 255,255")
+      self.v.m_animate("center", toPoint: CGPointMake(100,100)) {
+        print("moved to 100,100")
+        self.v.m_animate("center", toPoint: CGPointMake(300,400)) {
+          print("moved to 300,400")
+          self.testChainingAnimation()
+        }
+      }
+    }
+  }
   func tap(gr:UITapGestureRecognizer){
     let p = gr.locationInView(view)
     if useMotion{
-      springBehavior.target = [p.x, p.y]
+      v.m_animate("center", toPoint: p)
     }else{
       if let anim = v.layer.pop_animationForKey("posn") as? POPSpringAnimation {
         anim.toValue = NSValue(CGPoint:p)
@@ -89,7 +95,7 @@ class MotionAnimatorTestViewController: UIViewController {
     case .Changed, .Ended:
       let p = startPoint + trans
       if useMotion{
-        springBehavior.target = [p.x, p.y]
+        v.m_animate("center", toPoint: p)
       }else{
         if let anim = v.layer.pop_animationForKey("posn") as? POPSpringAnimation {
           anim.toValue = NSValue(CGPoint:startPoint + trans)

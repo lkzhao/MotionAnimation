@@ -19,6 +19,7 @@
 		A34917341C4C8F05008701E2 /* SpringValueAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34917331C4C8F05008701E2 /* SpringValueAnimation.swift */; };
 		A34917381C4CA832008701E2 /* NSObject+MotionAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34917371C4CA832008701E2 /* NSObject+MotionAnimation.swift */; };
 		A349173A1C4CC5D1008701E2 /* CGPoint+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34917391C4CC5D1008701E2 /* CGPoint+Util.swift */; };
+		A349173F1C4DA835008701E2 /* ValueAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A349173E1C4DA835008701E2 /* ValueAnimation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		A34917331C4C8F05008701E2 /* SpringValueAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpringValueAnimation.swift; sourceTree = "<group>"; };
 		A34917371C4CA832008701E2 /* NSObject+MotionAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSObject+MotionAnimation.swift"; sourceTree = "<group>"; };
 		A34917391C4CC5D1008701E2 /* CGPoint+Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+Util.swift"; sourceTree = "<group>"; };
+		A349173E1C4DA835008701E2 /* ValueAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValueAnimation.swift; sourceTree = "<group>"; };
 		F18D9428EA90888FB6C25A21 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -100,6 +102,7 @@
 			children = (
 				A34917291C4C3EA7008701E2 /* MotionAnimator.swift */,
 				A34917311C4C8EEA008701E2 /* MotionAnimation.swift */,
+				A349173E1C4DA835008701E2 /* ValueAnimation.swift */,
 				A34917391C4CC5D1008701E2 /* CGPoint+Util.swift */,
 				A34917331C4C8F05008701E2 /* SpringValueAnimation.swift */,
 				A34917371C4CA832008701E2 /* NSObject+MotionAnimation.swift */,
@@ -245,6 +248,7 @@
 				A34917381C4CA832008701E2 /* NSObject+MotionAnimation.swift in Sources */,
 				A34917181C4AC8E0008701E2 /* ViewController.swift in Sources */,
 				A349172C1C4C4C20008701E2 /* MotionAnimatorTestViewController.swift in Sources */,
+				A349173F1C4DA835008701E2 /* ValueAnimation.swift in Sources */,
 				A34917161C4AC8E0008701E2 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

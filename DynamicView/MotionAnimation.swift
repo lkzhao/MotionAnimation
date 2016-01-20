@@ -8,15 +8,18 @@
 
 import UIKit
 
+protocol MotionAnimationDelegate{
+  func animationDidStop(animation:MotionAnimation)
+}
+
 class MotionAnimation: NSObject {
-  internal weak var obj:NSObject?{
-    didSet{
-      obj != nil ? play() : stop()
-    }
-  }
   internal var animator:MotionAnimator?
-  internal weak var parentBehavior:MotionAnimation?
-  internal var childBehaviors:[MotionAnimation] = []
+  internal weak var parentAnimation:MotionAnimation?
+  internal var childAnimations:[MotionAnimation] = []
+  
+  var delegate:MotionAnimationDelegate?
+  var onCompletion:((animation:MotionAnimation) -> Void)?
+
   var playing:Bool{
     return MotionAnimator.sharedInstance.hasAnimation(self)
   }
@@ -27,18 +30,22 @@ class MotionAnimation: NSObject {
   }
   
   func addChildBehavior(b:MotionAnimation){
-    if childBehaviors.indexOf(b) == nil{
-      childBehaviors.append(b)
-      b.parentBehavior = self
+    if childAnimations.indexOf(b) == nil{
+      childAnimations.append(b)
+      b.parentAnimation = self
     }
   }
   
   func play(){
-    MotionAnimator.sharedInstance.addAnimation(self)
+    if parentAnimation == nil{
+      MotionAnimator.sharedInstance.addAnimation(self)
+    }
   }
   
   func stop(){
-    MotionAnimator.sharedInstance.removeAnimation(self)
+    if parentAnimation == nil{
+      MotionAnimator.sharedInstance.removeAnimation(self)
+    }
   }
   
   // returning true means require next update(not yet reached target state)
@@ -46,7 +53,7 @@ class MotionAnimation: NSObject {
   // the target value changed
   func update(dt:CGFloat) -> Bool{
     var running = false
-    for c in childBehaviors{
+    for c in childAnimations{
       if c.update(dt){
         running = true
       }
