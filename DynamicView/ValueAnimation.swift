@@ -20,6 +20,7 @@ class ValueAnimation:MotionAnimation {
       }
     }
   }
+  var velocity:CGFloat = 0
   
   override init() {
     super.init()
@@ -52,6 +53,15 @@ class MultiValueAnimation:MotionAnimation {
     for (i, c) in (childAnimations as! [ValueAnimation]).enumerate(){
       cb(c, i)
     }
+  }
+  
+  var velocity:[CGFloat]{
+    var velocity:[CGFloat] = []
+    velocity.reserveCapacity(childAnimations.count)
+    loop { c, i in
+      velocity.append(c.velocity)
+    }
+    return velocity
   }
   
   var current:[CGFloat] = [0]

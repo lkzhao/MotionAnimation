@@ -10,19 +10,13 @@ import UIKit
 
 
 class SpringValueAnimation:ValueAnimation {
-  var errorMargin:CGFloat = 1
-  var stiffness:CGFloat = 120
-  var damping:CGFloat = 20
-  
-  var velocity:CGFloat = 0
+  var threshold:CGFloat = 0.001
+  var stiffness:CGFloat = 150
+  var damping:CGFloat = 10
   
   //from https://github.com/chenglou/react-motion
   override func update(dt:CGFloat) -> Bool{
     let x = getter?() ?? 0
-
-    if abs(velocity) < errorMargin && abs(target - x) < errorMargin {
-      return false
-    }
 
     // Force
     let Fspring = -stiffness * (x - target);
@@ -35,7 +29,7 @@ class SpringValueAnimation:ValueAnimation {
     let newV = velocity + a * dt;
     let newX = x + newV * dt;
     
-    if abs(velocity) < errorMargin && abs(target - newX) < errorMargin {
+    if abs(velocity) < threshold && abs(target - newX) < threshold {
       setter?(target)
       velocity = 0
       return false

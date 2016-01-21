@@ -61,7 +61,8 @@ extension NSObject{
     if m_animations != nil{
       m_animations![key] = animation
     }else{
-      m_animations = [key:animation]
+      m_animations = [:]
+      m_animations![key] = animation
     }
   }
   func m_animationForKey(key:String) -> MotionAnimation?{
@@ -110,7 +111,13 @@ extension NSObject{
     }
   }
   
-  func m_animate(key:String, toValue:CGFloat, stiffness:CGFloat? = nil, damping:CGFloat? = nil, completion:(() -> Void)? = nil){
+  func m_animate(key:String, toValue:CGFloat, stiffness:CGFloat? = nil, damping:CGFloat? = nil, threshold:CGFloat? = nil,onUpdate:((CGFloat) -> Void)? = nil,completion:(() -> Void)? = nil){
+    var wrappedOnUpdate:(([CGFloat]) -> Void)? = nil
+    if let onUpdate = onUpdate{
+      wrappedOnUpdate = { velocity in
+        onUpdate(velocity[0])
+      }
+    }
     self.m_animate(key,
       toValues: [toValue],
       stiffness: stiffness,
@@ -120,10 +127,18 @@ extension NSObject{
       },
       setter: {
         self.setValue($0[0], forKeyPath: key)
-      }, completion: completion)
+      },
+      onUpdate: wrappedOnUpdate,
+      completion: completion)
   }
 
-  func m_animate(key:String, toPoint:CGPoint, stiffness:CGFloat? = nil, damping:CGFloat? = nil, completion:(() -> Void)? = nil){
+  func m_animate(key:String, toPoint:CGPoint, stiffness:CGFloat? = nil, damping:CGFloat? = nil, threshold:CGFloat? = nil,onUpdate:((CGPoint) -> Void)? = nil,completion:(() -> Void)? = nil){
+    var wrappedOnUpdate:(([CGFloat]) -> Void)? = nil
+    if let onUpdate = onUpdate{
+      wrappedOnUpdate = { velocity in
+        onUpdate(CGPointMake(velocity[0], velocity[1]))
+      }
+    }
     self.m_animate(key,
       toValues: [toPoint.x, toPoint.y],
       stiffness: stiffness,
@@ -133,10 +148,18 @@ extension NSObject{
         return [p.x, p.y]
       }, setter: {
         self.setValue(NSValue(CGPoint: CGPointMake($0[0], $0[1])), forKeyPath: key)
-      }, completion: completion)
+      },
+      onUpdate: wrappedOnUpdate,
+      completion: completion)
   }
 
-  func m_animate(key:String, toRect:CGRect, stiffness:CGFloat? = nil, damping:CGFloat? = nil, completion:(() -> Void)? = nil){
+  func m_animate(key:String, toRect:CGRect, stiffness:CGFloat? = nil, damping:CGFloat? = nil, threshold:CGFloat? = nil,onUpdate:((CGRect) -> Void)? = nil,completion:(() -> Void)? = nil){
+    var wrappedOnUpdate:(([CGFloat]) -> Void)? = nil
+    if let onUpdate = onUpdate{
+      wrappedOnUpdate = { velocity in
+        onUpdate(CGRectMake(velocity[0], velocity[1], velocity[2], velocity[3]))
+      }
+    }
     self.m_animate(key,
       toValues: [toRect.origin.x, toRect.origin.y, toRect.width, toRect.height],
       stiffness: stiffness,
@@ -146,23 +169,31 @@ extension NSObject{
         return [p.origin.x, p.origin.y, p.width, p.height]
       }, setter: {
         self.setValue(NSValue(CGRect: CGRectMake($0[0], $0[1], $0[2], $0[3])), forKeyPath: key)
-      }, completion: completion)
+      },
+      onUpdate: wrappedOnUpdate,
+      completion: completion)
   }
   
-  func m_animate(key:String, toValues:[CGFloat], stiffness:CGFloat? = nil, damping:CGFloat? = nil, getter:CGFloatValuesGetterBlock?, setter:CGFloatValuesSetterBlock?, completion:(() -> Void)?){
+  func m_animate(key:String, toValues:[CGFloat], stiffness:CGFloat? = nil, damping:CGFloat? = nil, threshold:CGFloat? = nil, getter:CGFloatValuesGetterBlock? = nil, setter:CGFloatValuesSetterBlock? = nil, onUpdate:(([CGFloat]) -> Void)? = nil, completion:(() -> Void)? = nil){
     let anim:MultiValueAnimation
     if let existingAnim = m_animationForKey(key) as? MultiValueAnimation{
       anim = existingAnim
+      if damping != nil || stiffness != nil{
+        anim.loop{ childAnimation, i in
+          if let spring = childAnimation as? SpringValueAnimation{
+            spring.damping = damping ?? spring.damping
+            spring.stiffness = stiffness ?? spring.stiffness
+            spring.threshold = threshold ?? spring.threshold
+          }
+        }
+      }
       anim.target = toValues
     }else{
       anim = MultiValueAnimation(animationFactory:{
           let spring = SpringValueAnimation()
-          if let stiffness = stiffness {
-            spring.stiffness = stiffness
-          }
-          if let damping = damping {
-            spring.damping = damping
-          }
+          spring.damping = damping ?? spring.damping
+          spring.stiffness = stiffness ?? spring.stiffness
+          spring.threshold = threshold ?? spring.threshold
           return spring
         },
         getter: {
@@ -185,6 +216,13 @@ extension NSObject{
       
       m_removeAnimationForKey(key)
       m_addAnimation(key, animation: anim)
+    }
+    if let onUpdate = onUpdate{
+      anim.onUpdate = { a in
+        onUpdate(anim.velocity)
+      }
+    }else{
+      anim.onUpdate = nil
     }
     if let completion = completion{
       anim.onCompletion = { anim in

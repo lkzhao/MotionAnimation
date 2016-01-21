@@ -8,6 +8,11 @@
 
 import UIKit
 
+extension CGFloat{
+  func clamp(a:CGFloat, _ b:CGFloat) -> CGFloat{
+    return self < a ? a : (self > b ? b : self)
+  }
+}
 extension CGPoint{
   func translate(dx:CGFloat, dy:CGFloat) -> CGPoint{
     return CGPointMake(self.x+dx, self.y+dy)

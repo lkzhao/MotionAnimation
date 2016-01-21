@@ -10,6 +10,7 @@ import UIKit
 
 protocol MotionAnimationDelegate{
   func animationDidStop(animation:MotionAnimation)
+  func animationDidPerformStep(animation:MotionAnimation)
 }
 
 class MotionAnimation: NSObject {
@@ -19,6 +20,7 @@ class MotionAnimation: NSObject {
   
   var delegate:MotionAnimationDelegate?
   var onCompletion:((animation:MotionAnimation) -> Void)?
+  var onUpdate:((animation:MotionAnimation) -> Void)?
 
   var playing:Bool{
     return MotionAnimator.sharedInstance.hasAnimation(self)

@@ -26,7 +26,6 @@ class MotionAnimator: NSObject {
   
   override init(){
     super.init()
-    start()
   }
   
   func update() {
@@ -34,6 +33,8 @@ class MotionAnimator: NSObject {
       if !b.update(CGFloat(displayLink.duration)){
         pendingStopAnimations.append(b)
       }
+      b.delegate?.animationDidPerformStep(b)
+      b.onUpdate?(animation: b)
     }
     
     for b in pendingStopAnimations{
