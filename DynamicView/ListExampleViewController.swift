@@ -32,7 +32,11 @@ class ListExampleViewController: UIViewController {
       }
       lastView = v
       
-      v.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: "pan:"))
+      let gr = LZPanGestureRecognizer(target: self, action: "pan:")
+      gr.xRange = 100...view.frame.width-100
+      gr.yRange = v.center.y...v.center.y
+      gr.yOverflowScale = 0
+      v.addGestureRecognizer(gr)
     }
     
     listItems.first?.m_animate("center", to: CGPointMake(view.center.x, 100), stiffness: 200, damping:15, threshold:1)
@@ -40,15 +44,12 @@ class ListExampleViewController: UIViewController {
     
   }
   
-  var startPoint:CGPoint?
-  func pan(gr:UIPanGestureRecognizer){
+  func pan(gr:LZPanGestureRecognizer){
     guard let grView = gr.view else {return}
     switch gr.state{
-    case .Began:
-      startPoint = grView.center
-    case .Changed:
-      let trans = gr.translationInView(grView)
-      grView.m_animate("center", to: CGPointMake((startPoint! + trans).x, grView.center.y), stiffness: 500, damping:25)
+    case .Began, .Changed:
+      let p = gr.translatedViewCenterPoint
+      grView.m_animate("center", to: p, stiffness: 500, damping:25)
     default:
       grView.m_animate("center", to: CGPointMake(view.center.x, grView.center.y), stiffness: 200, damping:15)
     }
