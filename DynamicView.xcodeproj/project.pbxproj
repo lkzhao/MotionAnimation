@@ -26,6 +26,9 @@
 		A34917431C53470F008701E2 /* MotionAnimationPropertyState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34917421C53470F008701E2 /* MotionAnimationPropertyState.swift */; };
 		A34917451C5347B7008701E2 /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34917441C5347B7008701E2 /* Types.swift */; };
 		A3D92B121C573A5500C34FBD /* LZPanGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D92B111C573A5500C34FBD /* LZPanGestureRecognizer.swift */; };
+		A3D92B141C58844C00C34FBD /* ViewNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D92B131C58844C00C34FBD /* ViewNode.swift */; };
+		A3D92B161C58845D00C34FBD /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D92B151C58845D00C34FBD /* MainViewController.swift */; };
+		A3D92B181C58880200C34FBD /* ListViewNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D92B171C58880200C34FBD /* ListViewNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +55,9 @@
 		A34917421C53470F008701E2 /* MotionAnimationPropertyState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionAnimationPropertyState.swift; sourceTree = "<group>"; };
 		A34917441C5347B7008701E2 /* Types.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
 		A3D92B111C573A5500C34FBD /* LZPanGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LZPanGestureRecognizer.swift; sourceTree = "<group>"; };
+		A3D92B131C58844C00C34FBD /* ViewNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewNode.swift; sourceTree = "<group>"; };
+		A3D92B151C58845D00C34FBD /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		A3D92B171C58880200C34FBD /* ListViewNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewNode.swift; sourceTree = "<group>"; };
 		F18D9428EA90888FB6C25A21 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -101,6 +107,8 @@
 				A34917171C4AC8E0008701E2 /* ViewController.swift */,
 				A349172B1C4C4C20008701E2 /* MotionAnimatorTestViewController.swift */,
 				A32FEDE31C51C8CA004F642A /* ListExampleViewController.swift */,
+				A3D92B151C58845D00C34FBD /* MainViewController.swift */,
+				A3D92B171C58880200C34FBD /* ListViewNode.swift */,
 				A34917191C4AC8E0008701E2 /* Main.storyboard */,
 				A349171C1C4AC8E0008701E2 /* Assets.xcassets */,
 				A349171E1C4AC8E0008701E2 /* LaunchScreen.storyboard */,
@@ -124,6 +132,7 @@
 				A34917441C5347B7008701E2 /* Types.swift */,
 				A34917421C53470F008701E2 /* MotionAnimationPropertyState.swift */,
 				A3D92B111C573A5500C34FBD /* LZPanGestureRecognizer.swift */,
+				A3D92B131C58844C00C34FBD /* ViewNode.swift */,
 			);
 			name = MotionAnimation;
 			sourceTree = "<group>";
@@ -267,9 +276,12 @@
 				A349172A1C4C3EA7008701E2 /* MotionAnimator.swift in Sources */,
 				A34917381C4CA832008701E2 /* NSObject+MotionAnimation.swift in Sources */,
 				A34917181C4AC8E0008701E2 /* ViewController.swift in Sources */,
+				A3D92B161C58845D00C34FBD /* MainViewController.swift in Sources */,
 				A34917431C53470F008701E2 /* MotionAnimationPropertyState.swift in Sources */,
 				A349172C1C4C4C20008701E2 /* MotionAnimatorTestViewController.swift in Sources */,
 				A3D92B121C573A5500C34FBD /* LZPanGestureRecognizer.swift in Sources */,
+				A3D92B141C58844C00C34FBD /* ViewNode.swift in Sources */,
+				A3D92B181C58880200C34FBD /* ListViewNode.swift in Sources */,
 				A32FEDE41C51C8CA004F642A /* ListExampleViewController.swift in Sources */,
 				A32FEDEA1C51CA84004F642A /* time.swift in Sources */,
 				A349173F1C4DA835008701E2 /* ValueAnimation.swift in Sources */,

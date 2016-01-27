@@ -39,10 +39,10 @@
             </objects>
             <point key="canvasLocation" x="440" y="983"/>
         </scene>
-        <!--List Example View Controller-->
+        <!--Main View Controller-->
         <scene sceneID="KXc-A4-crL">
             <objects>
-                <viewController id="bol-8H-5eM" customClass="ListExampleViewController" customModule="DynamicView" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="bol-8H-5eM" customClass="MainViewController" customModule="DynamicView" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hv2-wl-L7q"/>
                         <viewControllerLayoutGuide type="bottom" id="Xt9-h7-qoe"/>

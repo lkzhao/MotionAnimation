@@ -73,6 +73,17 @@ extension NSObject{
   }
   func m_animate(
     key:String,
+    to:CGRect,
+    stiffness:CGFloat? = nil,
+    damping:CGFloat? = nil,
+    threshold:CGFloat? = nil,
+    valueUpdate:MotionAnimationValueObserver? = nil,
+    velocityUpdate:MotionAnimationVelocityObserver? = nil,
+    completion:(() -> Void)? = nil) {
+      getPropertyState(key).animate(.CGRectValue(to), stiffness: stiffness, damping: damping, threshold: threshold, valueUpdate:valueUpdate, velocityUpdate:velocityUpdate, completion: completion)
+  }
+  func m_animate(
+    key:String,
     to:CGPoint,
     stiffness:CGFloat? = nil,
     damping:CGFloat? = nil,
