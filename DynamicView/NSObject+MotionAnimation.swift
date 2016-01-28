@@ -42,6 +42,9 @@ extension NSObject{
     getPropertyState(key).setValues(values)
   }
   func m_defineCustomProperty(key:String, initialValues:[CGFloat], valueUpdateCallback:CGFloatValuesSetterBlock){
+    if m_propertyStates[key] != nil{
+      return
+    }
     m_propertyStates[key] = MotionAnimationPropertyState(values: initialValues)
     getPropertyState(key).addValueUpdateCallback(.CGFloatMultiObserver(valueUpdateCallback))
   }
@@ -59,6 +62,28 @@ extension NSObject{
     NSTimer.schedule(delay: time) { timer in
       completion()
     }
+  }
+  func m_animate(
+    key:String,
+    to:UIColor,
+    stiffness:CGFloat? = nil,
+    damping:CGFloat? = nil,
+    threshold:CGFloat? = nil,
+    valueUpdate:MotionAnimationValueObserver? = nil,
+    velocityUpdate:MotionAnimationVelocityObserver? = nil,
+    completion:(() -> Void)? = nil) {
+      getPropertyState(key).animate(.UIColorValue(to), stiffness: stiffness, damping: damping, threshold: threshold, valueUpdate:valueUpdate, velocityUpdate:velocityUpdate, completion: completion)
+  }
+  func m_animate(
+    key:String,
+    to:CGFloat,
+    stiffness:CGFloat? = nil,
+    damping:CGFloat? = nil,
+    threshold:CGFloat? = nil,
+    valueUpdate:MotionAnimationValueObserver? = nil,
+    velocityUpdate:MotionAnimationVelocityObserver? = nil,
+    completion:(() -> Void)? = nil) {
+      getPropertyState(key).animate(.CGFloatValue(to), stiffness: stiffness, damping: damping, threshold: threshold, valueUpdate:valueUpdate, velocityUpdate:velocityUpdate, completion: completion)
   }
   func m_animate(
     key:String,

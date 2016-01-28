@@ -10,18 +10,11 @@ import UIKit
 
 class MainViewController: UIViewController {
   
-  let rootNode = ListViewNode()
+  var rootNode:RootNode!
   override func viewDidLoad() {
     super.viewDidLoad()
-    rootNode.setup()
-    rootNode.initializeView()
-    view.addSubview(rootNode.view!)
-    let state = rootNode.getDefaultState()
-    state.animate = false
-    state.frame = view.bounds
-    rootNode.state = state
-    state.animate = true
-    rootNode.state = state
+    MotionAnimator.sharedInstance.debugEnabled = true
+    rootNode = RootNode(rootViewController: self, rootViewNode: ListViewNode())
   }
 
 }

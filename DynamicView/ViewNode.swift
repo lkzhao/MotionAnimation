@@ -8,10 +8,14 @@
 
 import UIKit
 
-class ViewNodeState {
+typealias TapHandler = ((node:ViewNode, gr:UITapGestureRecognizer) -> Void)
+typealias DragHandler = ((node:ViewNode, gr:LZPanGestureRecognizer) -> Void)
+
+class ViewNodeState:NSObject {
   var animate:Bool = true
-  var frame:CGRect?
-  var onDrag:((gr:LZPanGestureRecognizer) -> Void)?
+    var frame:CGRect?
+    var onTap:TapHandler?
+  var onDrag:DragHandler?
   var center:CGPoint?{
     get{
       if let frame = frame{
@@ -26,29 +30,65 @@ class ViewNodeState {
       }
     }
   }
-  convenience init(frame:CGRect){
+  convenience init(frame:CGRect, onTap:TapHandler? = nil, onDrag:DragHandler? = nil){
     self.init()
     self.frame = frame
+    self.onTap = onTap
+    self.onDrag = onDrag
   }
-  init(){
+  override init(){
     
   }
 }
 
-class ViewNode: NSObject {
+class NodeLike:NSObject{
+  func swapSubnode(node:ViewNode, toNode:ViewNode){}
+}
+
+class RootNode:NodeLike{
+  var rootViewNode:ViewNode
+  var rootViewController:UIViewController
+  init(rootViewController:UIViewController, rootViewNode:ViewNode){
+    self.rootViewController = rootViewController
+    self.rootViewNode = rootViewNode
+    super.init()
+
+    rootViewNode.setup()
+    rootViewNode.initializeView()
+
+    rootViewController.view.addSubview(rootViewNode.view!)
+    rootViewNode.supernode = self
+
+    let state = rootViewNode.getDefaultState()
+    state.animate = false
+    state.frame = rootViewController.view.bounds
+    rootViewNode.state = state
+    state.animate = true
+    rootViewNode.state = state
+  }
+  override func swapSubnode(node:ViewNode, toNode:ViewNode){
+    if node === rootViewNode{
+      rootViewNode = toNode
+    }
+  }
+}
+
+class ViewNode:NodeLike {
   var view:UIView?
-  weak var supernode:ViewNode?
+  var key:String?
+  weak var supernode:NodeLike?
   
   var subnodes:[String:ViewNode] = [:]
   
-  func getDefaultState() -> ViewNodeState{
+  dynamic func getDefaultState() -> ViewNodeState{
     return ViewNodeState()
   }
   
   func applyState(state:ViewNodeState?){
     if let state = state, frame = state.frame{
       if state.animate{
-        view!.m_animate("frame", to: frame)
+        view!.m_animate("frame", to: frame, stiffness: 200, damping: 25)
+        view!.m_animate("alpha", to: 1, stiffness: 150, damping: 15)
       }else{
         view!.frame = frame
       }
@@ -57,10 +97,6 @@ class ViewNode: NSObject {
   
   private var initialized:Bool{
     return view != nil
-  }
-  
-  func constructView() -> UIView{
-    return UIView(frame: CGRectMake(0,0,50,50))
   }
   
   func setup(){
@@ -82,13 +118,25 @@ class ViewNode: NSObject {
   }
   
   func initializeView(){
-    if initialized{
-      return
+    if !initialized{
+      view = UIView()
     }
-    view = constructView()
     for (_, subnode) in subnodes{
       subnode.initializeView()
       view!.addSubview(subnode.view!)
+    }
+    didTransferedToView()
+  }
+
+  func didTransferedToView(){
+
+  }
+
+  func willTransferFromView(){
+    if let grs = view?.gestureRecognizers{
+      for gr in grs{
+        view!.removeGestureRecognizer(gr)
+      }
     }
   }
 
@@ -96,6 +144,7 @@ class ViewNode: NSObject {
     if subnodes[key] == nil{
       subnodes[key] = node
       node.supernode = self
+      node.key = key
       node.setup()
       if initialized{
         node.initializeView()
@@ -104,13 +153,14 @@ class ViewNode: NSObject {
     }
   }
 
-  func removeSubnode(key:String){
-    if let node = subnodes.removeValueForKey(key){
-      // TODO
+  func removeSubnode(node:ViewNode){
+    if let key = node.key{
+      subnodes.removeValueForKey(key)
       if initialized{
         node.view?.removeFromSuperview()
       }
       node.supernode = nil
+      node.key = nil
     }
   }
 
@@ -124,12 +174,44 @@ class ViewNode: NSObject {
       }
     }
   }
-  
-  func transferViews(fromNode:ViewNode){
-    for (k, otherSubnode) in fromNode.subnodes{
-      if let ourSubnode = subnodes[k]{
-        ourSubnode.view = otherSubnode.view
+
+  func swapWithNode(node:ViewNode){
+    node.setup()
+    let notTransfered = node.transferFrom(self)
+    for n in notTransfered{
+      if let v = n.view{
+        v.m_animate("alpha", to: 0, stiffness: 150, damping: 15) {
+          v.removeFromSuperview()
+        }
+        // we dont dislink the view from the not transferred node since it might be transfered back
       }
     }
+    supernode?.swapSubnode(self, toNode: node)
+    node.initializeView()
+    node.applyState(node.getDefaultState())
+  }
+
+  override func swapSubnode(node:ViewNode, toNode:ViewNode){
+    if let key = node.key{
+      subnodes.removeValueForKey(key)
+      subnodes[key] = toNode
+    }
+  }
+  
+  func transferFrom(node:ViewNode) -> [ViewNode]{
+    node.willTransferFromView()
+    view = node.view
+    var notTransferedNodes:[ViewNode] = []
+    for (k, otherSubnode) in node.subnodes{
+      if let ourSubnode = subnodes[k]{
+        ourSubnode.transferFrom(otherSubnode)
+        print("transferred \(k)")
+      }else{
+        notTransferedNodes.append(otherSubnode)
+      }
+    }
+    node.view = nil
+    initializeView()
+    return notTransferedNodes
   }
 }

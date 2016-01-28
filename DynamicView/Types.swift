@@ -15,6 +15,7 @@ enum MotionAnimationValueObserver{
   case CGRectObserver((CGRect) -> Void)
   case CGPointObserver((CGPoint) -> Void)
   case CGFloatMultiObserver(([CGFloat]) -> Void)
+  case UIColorObserver((UIColor) -> Void)
   
   var valueType:MotionAnimationValueType{
     switch self{
@@ -26,6 +27,8 @@ enum MotionAnimationValueObserver{
       return .CGPointValue
     case .CGFloatMultiObserver:
       return .CGFloatMultiValue
+    case .UIColorObserver:
+      return .UIColorValue
     }
   }
   
@@ -39,6 +42,8 @@ enum MotionAnimationValueObserver{
       cb(CGRectMake(values[0],values[1],values[2],values[3]))
     case .CGFloatMultiObserver(let cb):
       cb(values)
+    case .UIColorObserver(let cb):
+      cb(UIColor(red: values[0], green: values[1], blue: values[2], alpha: values[3]))
     }
   }
 }
@@ -48,12 +53,14 @@ enum MotionAnimationValueType{
   case CGRectValue
   case CGPointValue
   case CGFloatMultiValue
+  case UIColorValue
 }
 enum MotionAnimationValue{
   case CGFloatValue(CGFloat)
   case CGRectValue(CGRect)
   case CGPointValue(CGPoint)
   case CGFloatMultiValue([CGFloat])
+  case UIColorValue(UIColor)
   
   static func valueFromCGFloatValues(values:[CGFloat], withType type:MotionAnimationValueType) -> MotionAnimationValue{
     switch type{
@@ -65,18 +72,22 @@ enum MotionAnimationValue{
       return .CGPointValue(CGPointMake(values[0],values[1]))
     case .CGFloatMultiValue:
       return .CGFloatMultiValue(values)
+    case .UIColorValue:
+      return .UIColorValue(UIColor(red: values[0], green: values[1], blue: values[2], alpha: values[3]))
     }
   }
   static func valueFromRawValue(value:AnyObject, withType type:MotionAnimationValueType) -> MotionAnimationValue{
     switch type{
     case .CGFloatValue:
-      return MotionAnimationValue.CGFloatValue(CGFloat(value.floatValue!))
+      return .CGFloatValue(CGFloat(value.floatValue!))
     case .CGRectValue:
-      return MotionAnimationValue.CGRectValue(value.CGRectValue!)
+      return .CGRectValue(value.CGRectValue!)
     case .CGPointValue:
-      return MotionAnimationValue.CGPointValue(value.CGPointValue)
+      return .CGPointValue(value.CGPointValue)
     case .CGFloatMultiValue:
       return .CGFloatMultiValue(value as! [CGFloat])
+    case .UIColorValue:
+      return .UIColorValue(value as! UIColor)
     }
   }
   var type:MotionAnimationValueType{
@@ -89,6 +100,8 @@ enum MotionAnimationValue{
       return .CGPointValue
     case .CGFloatMultiValue:
       return .CGFloatMultiValue
+    case .UIColorValue:
+      return .UIColorValue
     }
   }
   func getCGFloatValues() -> [CGFloat]{
@@ -101,6 +114,13 @@ enum MotionAnimationValue{
       return [v.x, v.y]
     case .CGFloatMultiValue(let v):
       return v
+    case .UIColorValue(let v):
+      var r : CGFloat = 0
+      var g : CGFloat = 0
+      var b : CGFloat = 0
+      var a : CGFloat = 0
+      v.getRed(&r, green: &g, blue: &b, alpha: &a)
+      return [r,g,b,a]
     }
   }
   func rawValue() -> AnyObject{
@@ -112,6 +132,8 @@ enum MotionAnimationValue{
     case .CGPointValue(let v):
       return NSValue(CGPoint: v)
     case .CGFloatMultiValue(let v):
+      return v
+    case .UIColorValue(let v):
       return v
     }
   }
