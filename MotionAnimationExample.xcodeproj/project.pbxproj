@@ -1,0 +1,364 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A3D92B261C6803C000C34FBD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D92B251C6803C000C34FBD /* AppDelegate.swift */; };
+		A3D92B2D1C6803C000C34FBD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3D92B2C1C6803C000C34FBD /* Assets.xcassets */; };
+		A3D92B301C6803C000C34FBD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3D92B2E1C6803C000C34FBD /* LaunchScreen.storyboard */; };
+		A3D92B4F1C6803E300C34FBD /* SquareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D92B4D1C6803E300C34FBD /* SquareViewController.swift */; };
+		A3D92B501C6803E300C34FBD /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D92B4E1C6803E300C34FBD /* ListViewController.swift */; };
+		A3D92B5E1C68096900C34FBD /* CGPoint+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D92B531C68096900C34FBD /* CGPoint+Util.swift */; };
+		A3D92B5F1C68096900C34FBD /* LZPanGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D92B541C68096900C34FBD /* LZPanGestureRecognizer.swift */; };
+		A3D92B601C68096900C34FBD /* MotionAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D92B551C68096900C34FBD /* MotionAnimation.swift */; };
+		A3D92B611C68096900C34FBD /* MotionAnimationPropertyState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D92B561C68096900C34FBD /* MotionAnimationPropertyState.swift */; };
+		A3D92B621C68096900C34FBD /* MotionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D92B571C68096900C34FBD /* MotionAnimator.swift */; };
+		A3D92B631C68096900C34FBD /* NSObject+MotionAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D92B581C68096900C34FBD /* NSObject+MotionAnimation.swift */; };
+		A3D92B641C68096900C34FBD /* NSTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D92B591C68096900C34FBD /* NSTimer.swift */; };
+		A3D92B651C68096900C34FBD /* SpringValueAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D92B5A1C68096900C34FBD /* SpringValueAnimation.swift */; };
+		A3D92B661C68096900C34FBD /* time.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D92B5B1C68096900C34FBD /* time.swift */; };
+		A3D92B671C68096900C34FBD /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D92B5C1C68096900C34FBD /* Types.swift */; };
+		A3D92B681C68096900C34FBD /* ValueAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D92B5D1C68096900C34FBD /* ValueAnimation.swift */; };
+		A3D92B6A1C68098900C34FBD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D92B691C68098900C34FBD /* ViewController.swift */; };
+		A3FC21771C680CC8008566BB /* ExampleBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FC21761C680CC8008566BB /* ExampleBaseViewController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A3D92B221C6803C000C34FBD /* MotionAnimationExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MotionAnimationExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A3D92B251C6803C000C34FBD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A3D92B2C1C6803C000C34FBD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A3D92B2F1C6803C000C34FBD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		A3D92B311C6803C000C34FBD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A3D92B4D1C6803E300C34FBD /* SquareViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SquareViewController.swift; sourceTree = "<group>"; };
+		A3D92B4E1C6803E300C34FBD /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
+		A3D92B531C68096900C34FBD /* CGPoint+Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+Util.swift"; sourceTree = "<group>"; };
+		A3D92B541C68096900C34FBD /* LZPanGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LZPanGestureRecognizer.swift; sourceTree = "<group>"; };
+		A3D92B551C68096900C34FBD /* MotionAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionAnimation.swift; sourceTree = "<group>"; };
+		A3D92B561C68096900C34FBD /* MotionAnimationPropertyState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionAnimationPropertyState.swift; sourceTree = "<group>"; };
+		A3D92B571C68096900C34FBD /* MotionAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionAnimator.swift; sourceTree = "<group>"; };
+		A3D92B581C68096900C34FBD /* NSObject+MotionAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSObject+MotionAnimation.swift"; sourceTree = "<group>"; };
+		A3D92B591C68096900C34FBD /* NSTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSTimer.swift; sourceTree = "<group>"; };
+		A3D92B5A1C68096900C34FBD /* SpringValueAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpringValueAnimation.swift; sourceTree = "<group>"; };
+		A3D92B5B1C68096900C34FBD /* time.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = time.swift; sourceTree = "<group>"; };
+		A3D92B5C1C68096900C34FBD /* Types.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
+		A3D92B5D1C68096900C34FBD /* ValueAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValueAnimation.swift; sourceTree = "<group>"; };
+		A3D92B691C68098900C34FBD /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A3FC21761C680CC8008566BB /* ExampleBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleBaseViewController.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A3D92B1F1C6803C000C34FBD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A3D92B191C6803C000C34FBD = {
+			isa = PBXGroup;
+			children = (
+				A3D92B241C6803C000C34FBD /* MotionAnimation */,
+				A3D92B231C6803C000C34FBD /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A3D92B231C6803C000C34FBD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A3D92B221C6803C000C34FBD /* MotionAnimationExample.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A3D92B241C6803C000C34FBD /* MotionAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				A3D92B521C68096900C34FBD /* MotionAnimation */,
+				A3FC21741C680C3E008566BB /* Support Files */,
+				A3FC21751C680C74008566BB /* Examples */,
+				A3D92B691C68098900C34FBD /* ViewController.swift */,
+			);
+			name = MotionAnimation;
+			path = MotionAnimationExample;
+			sourceTree = "<group>";
+		};
+		A3D92B521C68096900C34FBD /* MotionAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				A3D92B531C68096900C34FBD /* CGPoint+Util.swift */,
+				A3D92B541C68096900C34FBD /* LZPanGestureRecognizer.swift */,
+				A3D92B551C68096900C34FBD /* MotionAnimation.swift */,
+				A3D92B561C68096900C34FBD /* MotionAnimationPropertyState.swift */,
+				A3D92B571C68096900C34FBD /* MotionAnimator.swift */,
+				A3D92B581C68096900C34FBD /* NSObject+MotionAnimation.swift */,
+				A3D92B591C68096900C34FBD /* NSTimer.swift */,
+				A3D92B5A1C68096900C34FBD /* SpringValueAnimation.swift */,
+				A3D92B5B1C68096900C34FBD /* time.swift */,
+				A3D92B5C1C68096900C34FBD /* Types.swift */,
+				A3D92B5D1C68096900C34FBD /* ValueAnimation.swift */,
+			);
+			name = MotionAnimation;
+			path = ../MotionAnimation;
+			sourceTree = "<group>";
+		};
+		A3FC21741C680C3E008566BB /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				A3D92B251C6803C000C34FBD /* AppDelegate.swift */,
+				A3D92B2C1C6803C000C34FBD /* Assets.xcassets */,
+				A3D92B2E1C6803C000C34FBD /* LaunchScreen.storyboard */,
+				A3D92B311C6803C000C34FBD /* Info.plist */,
+			);
+			name = "Support Files";
+			sourceTree = "<group>";
+		};
+		A3FC21751C680C74008566BB /* Examples */ = {
+			isa = PBXGroup;
+			children = (
+				A3D92B4D1C6803E300C34FBD /* SquareViewController.swift */,
+				A3D92B4E1C6803E300C34FBD /* ListViewController.swift */,
+				A3FC21761C680CC8008566BB /* ExampleBaseViewController.swift */,
+			);
+			name = Examples;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A3D92B211C6803C000C34FBD /* MotionAnimationExample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A3D92B341C6803C000C34FBD /* Build configuration list for PBXNativeTarget "MotionAnimationExample" */;
+			buildPhases = (
+				A3D92B1E1C6803C000C34FBD /* Sources */,
+				A3D92B1F1C6803C000C34FBD /* Frameworks */,
+				A3D92B201C6803C000C34FBD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MotionAnimationExample;
+			productName = MotionAnimation;
+			productReference = A3D92B221C6803C000C34FBD /* MotionAnimationExample.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A3D92B1A1C6803C000C34FBD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0720;
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = lkzhao;
+				TargetAttributes = {
+					A3D92B211C6803C000C34FBD = {
+						CreatedOnToolsVersion = 7.2;
+					};
+				};
+			};
+			buildConfigurationList = A3D92B1D1C6803C000C34FBD /* Build configuration list for PBXProject "MotionAnimationExample" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A3D92B191C6803C000C34FBD;
+			productRefGroup = A3D92B231C6803C000C34FBD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A3D92B211C6803C000C34FBD /* MotionAnimationExample */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A3D92B201C6803C000C34FBD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A3D92B301C6803C000C34FBD /* LaunchScreen.storyboard in Resources */,
+				A3D92B2D1C6803C000C34FBD /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A3D92B1E1C6803C000C34FBD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A3FC21771C680CC8008566BB /* ExampleBaseViewController.swift in Sources */,
+				A3D92B6A1C68098900C34FBD /* ViewController.swift in Sources */,
+				A3D92B621C68096900C34FBD /* MotionAnimator.swift in Sources */,
+				A3D92B601C68096900C34FBD /* MotionAnimation.swift in Sources */,
+				A3D92B4F1C6803E300C34FBD /* SquareViewController.swift in Sources */,
+				A3D92B501C6803E300C34FBD /* ListViewController.swift in Sources */,
+				A3D92B631C68096900C34FBD /* NSObject+MotionAnimation.swift in Sources */,
+				A3D92B611C68096900C34FBD /* MotionAnimationPropertyState.swift in Sources */,
+				A3D92B641C68096900C34FBD /* NSTimer.swift in Sources */,
+				A3D92B5E1C68096900C34FBD /* CGPoint+Util.swift in Sources */,
+				A3D92B671C68096900C34FBD /* Types.swift in Sources */,
+				A3D92B661C68096900C34FBD /* time.swift in Sources */,
+				A3D92B651C68096900C34FBD /* SpringValueAnimation.swift in Sources */,
+				A3D92B261C6803C000C34FBD /* AppDelegate.swift in Sources */,
+				A3D92B681C68096900C34FBD /* ValueAnimation.swift in Sources */,
+				A3D92B5F1C68096900C34FBD /* LZPanGestureRecognizer.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		A3D92B2E1C6803C000C34FBD /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A3D92B2F1C6803C000C34FBD /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A3D92B321C6803C000C34FBD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A3D92B331C6803C000C34FBD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A3D92B351C6803C000C34FBD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "$(SRCROOT)/MotionAnimationExample/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.lkzhao.MotionAnimation;
+				PRODUCT_NAME = MotionAnimationExample;
+			};
+			name = Debug;
+		};
+		A3D92B361C6803C000C34FBD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "$(SRCROOT)/MotionAnimationExample/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.lkzhao.MotionAnimation;
+				PRODUCT_NAME = MotionAnimationExample;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A3D92B1D1C6803C000C34FBD /* Build configuration list for PBXProject "MotionAnimationExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A3D92B321C6803C000C34FBD /* Debug */,
+				A3D92B331C6803C000C34FBD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A3D92B341C6803C000C34FBD /* Build configuration list for PBXNativeTarget "MotionAnimationExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A3D92B351C6803C000C34FBD /* Debug */,
+				A3D92B361C6803C000C34FBD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A3D92B1A1C6803C000C34FBD /* Project object */;
+}
