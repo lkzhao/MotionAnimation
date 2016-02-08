@@ -108,7 +108,7 @@ public extension NSObject{
     for (o, keys) in objects{
       var observedKeysForObject:[String:MotionAnimationObserverKey] = [:]
       for key in keys{
-        observedKeysForObject[key] = o.getPropertyState(key).addValueUpdateCallback(.CGFloatMultiObserver({ _ in
+        observedKeysForObject[key] = o.getPropertyState(key).addValueUpdateCallback(.Observer({ _ in
           multiValueOb.object(o, didUpdateKey: key)
         }))
       }

@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "MotionAnimation"
-  s.version          = "0.0.3"
+  s.version          = "0.0.5"
   s.summary          = "Lightweight animation library for UIKit in Swift"
 
   s.description      = <<-DESC
