@@ -9,7 +9,7 @@
 import UIKit
 
 
-class SpringValueAnimation:ValueAnimation {
+public class SpringValueAnimation:ValueAnimation {
   var threshold:CGFloat = 0.001
   var stiffness:CGFloat = 150
   var damping:CGFloat = 10

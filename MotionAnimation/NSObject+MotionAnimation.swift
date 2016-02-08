@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension NSObject{
+public extension NSObject{
   private struct m_associatedKeys {
     static var m_propertyStates = "m_propertyStates_key"
   }

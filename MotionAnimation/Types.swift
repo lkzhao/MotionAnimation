@@ -10,7 +10,7 @@ import UIKit
 
 typealias MotionAnimationValueObserverKey = NSUUID
 
-enum MotionAnimationValueObserver{
+public enum MotionAnimationValueObserver{
   case CGFloatObserver((CGFloat) -> Void)
   case CGRectObserver((CGRect) -> Void)
   case CGPointObserver((CGPoint) -> Void)
@@ -48,14 +48,14 @@ enum MotionAnimationValueObserver{
   }
 }
 
-enum MotionAnimationValueType{
+public enum MotionAnimationValueType{
   case CGFloatValue
   case CGRectValue
   case CGPointValue
   case CGFloatMultiValue
   case UIColorValue
 }
-enum MotionAnimationValue{
+public enum MotionAnimationValue{
   case CGFloatValue(CGFloat)
   case CGRectValue(CGRect)
   case CGPointValue(CGPoint)
@@ -139,4 +139,4 @@ enum MotionAnimationValue{
   }
 }
 
-typealias MotionAnimationVelocityObserver = MotionAnimationValueObserver
+public typealias MotionAnimationVelocityObserver = MotionAnimationValueObserver

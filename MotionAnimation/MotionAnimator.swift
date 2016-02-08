@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MotionAnimator: NSObject {
+public class MotionAnimator: NSObject {
   static let sharedInstance = MotionAnimator()
   
   var debugEnabled = false

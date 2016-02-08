@@ -13,7 +13,7 @@ protocol MotionAnimationDelegate{
   func animationDidPerformStep(animation:MotionAnimation)
 }
 
-class MotionAnimation: NSObject {
+public class MotionAnimation: NSObject {
   internal var animator:MotionAnimator?
   internal weak var parentAnimation:MotionAnimation?
   internal var childAnimations:[MotionAnimation] = []

@@ -10,7 +10,7 @@ import UIKit
 import UIKit.UIGestureRecognizerSubclass
 
 
-class LZPanGestureRecognizer: UIPanGestureRecognizer {
+public class LZPanGestureRecognizer: UIPanGestureRecognizer {
   
   var startViewCenterPoint:CGPoint?
   
@@ -39,7 +39,7 @@ class LZPanGestureRecognizer: UIPanGestureRecognizer {
   var xRange:ClosedInterval<CGFloat> = CGFloat.min...CGFloat.max
   var yRange:ClosedInterval<CGFloat> = CGFloat.min...CGFloat.max
   
-  override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent) {
+  override public func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent) {
     super.touchesBegan(touches, withEvent: event)
     
     if state == .Failed{

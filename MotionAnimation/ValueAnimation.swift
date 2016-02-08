@@ -8,9 +8,9 @@
 
 import UIKit
 
-typealias CGFloatValueGetterBlock = (() -> CGFloat)
-typealias CGFloatValueSetterBlock = ((CGFloat) -> Void)
-class ValueAnimation:MotionAnimation {
+public typealias CGFloatValueGetterBlock = (() -> CGFloat)
+public typealias CGFloatValueSetterBlock = ((CGFloat) -> Void)
+public class ValueAnimation:MotionAnimation {
   var getter:CGFloatValueGetterBlock?
   var setter:CGFloatValueSetterBlock?
   var target:CGFloat = 0{
@@ -34,10 +34,10 @@ class ValueAnimation:MotionAnimation {
   }
 }
 
-typealias CGFloatValuesGetterBlock = (() -> [CGFloat])
-typealias CGFloatValuesSetterBlock = (([CGFloat]) -> Void)
-typealias ValueAnimationFactory = () -> ValueAnimation
-class MultiValueAnimation:MotionAnimation {
+public typealias CGFloatValuesGetterBlock = (() -> [CGFloat])
+public typealias CGFloatValuesSetterBlock = (([CGFloat]) -> Void)
+public typealias ValueAnimationFactory = () -> ValueAnimation
+public class MultiValueAnimation:MotionAnimation {
   var getter:CGFloatValuesGetterBlock?
   var setter:CGFloatValuesSetterBlock?
   var target:[CGFloat] = [0]{
