@@ -11,22 +11,22 @@ import UIKit
 public typealias CGFloatValueGetterBlock = (() -> CGFloat)
 public typealias CGFloatValueSetterBlock = ((CGFloat) -> Void)
 public class ValueAnimation:MotionAnimation {
-  var getter:CGFloatValueGetterBlock?
-  var setter:CGFloatValueSetterBlock?
-  var target:CGFloat = 0{
+  public var getter:CGFloatValueGetterBlock?
+  public var setter:CGFloatValueSetterBlock?
+  public var target:CGFloat = 0{
     didSet{
       if target != getter?(){
         play()
       }
     }
   }
-  var velocity:CGFloat = 0
+  public var velocity:CGFloat = 0
   
-  override init() {
+  public override init() {
     super.init()
   }
   
-  init(getter:CGFloatValueGetterBlock, setter:CGFloatValueSetterBlock, target:CGFloat) {
+  public init(getter:CGFloatValueGetterBlock, setter:CGFloatValueSetterBlock, target:CGFloat) {
     super.init()
     self.getter = getter
     self.setter = setter
@@ -38,9 +38,9 @@ public typealias CGFloatValuesGetterBlock = (() -> [CGFloat])
 public typealias CGFloatValuesSetterBlock = (([CGFloat]) -> Void)
 public typealias ValueAnimationFactory = () -> ValueAnimation
 public class MultiValueAnimation:MotionAnimation {
-  var getter:CGFloatValuesGetterBlock?
-  var setter:CGFloatValuesSetterBlock?
-  var target:[CGFloat] = [0]{
+  public var getter:CGFloatValuesGetterBlock?
+  public var setter:CGFloatValuesSetterBlock?
+  public var target:[CGFloat] = [0]{
     didSet{
       loop { c, i in
         c.target = self.target[i]
@@ -49,13 +49,13 @@ public class MultiValueAnimation:MotionAnimation {
     }
   }
   
-  func loop(cb:((ValueAnimation, Int) -> Void)){
+  public func loop(cb:((ValueAnimation, Int) -> Void)){
     for (i, c) in (childAnimations as! [ValueAnimation]).enumerate(){
       cb(c, i)
     }
   }
   
-  var velocity:[CGFloat]{
+  public var velocity:[CGFloat]{
     var velocity:[CGFloat] = []
     velocity.reserveCapacity(childAnimations.count)
     loop { c, i in
@@ -64,9 +64,9 @@ public class MultiValueAnimation:MotionAnimation {
     return velocity
   }
   
-  var current:[CGFloat] = [0]
+  public var current:[CGFloat] = [0]
   
-  override func update(dt: CGFloat) -> Bool {
+  public override func update(dt: CGFloat) -> Bool {
     if let p = getter?(){
       current = p
     }
@@ -75,7 +75,7 @@ public class MultiValueAnimation:MotionAnimation {
     return running
   }
   
-  init(animationFactory:ValueAnimationFactory, getter:CGFloatValuesGetterBlock, setter:CGFloatValuesSetterBlock, target:[CGFloat]) {
+  public init(animationFactory:ValueAnimationFactory, getter:CGFloatValuesGetterBlock, setter:CGFloatValuesSetterBlock, target:[CGFloat]) {
     super.init()
     self.getter = getter
     self.setter = setter

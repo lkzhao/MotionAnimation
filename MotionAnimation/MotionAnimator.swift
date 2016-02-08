@@ -9,9 +9,9 @@
 import UIKit
 
 public class MotionAnimator: NSObject {
-  static let sharedInstance = MotionAnimator()
+  public static let sharedInstance = MotionAnimator()
   
-  var debugEnabled = false
+  public var debugEnabled = false
   var displayLinkPaused:Bool{
     get{
       return displayLink == nil
@@ -51,7 +51,7 @@ public class MotionAnimator: NSObject {
     }
   }
   
-  func addAnimation(b:MotionAnimation){
+  public func addAnimation(b:MotionAnimation){
     if animations.indexOf(b) == nil {
       animations.append(b)
       b.animator = self
@@ -60,10 +60,10 @@ public class MotionAnimator: NSObject {
       }
     }
   }
-  func hasAnimation(b:MotionAnimation) -> Bool{
+  public func hasAnimation(b:MotionAnimation) -> Bool{
     return animations.indexOf(b) != nil
   }
-  func removeAnimation(b:MotionAnimation){
+  public func removeAnimation(b:MotionAnimation){
     if animations.indexOf(b) != nil {
       pendingStopAnimations.append(b)
     }

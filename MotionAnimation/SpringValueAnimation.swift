@@ -10,12 +10,12 @@ import UIKit
 
 
 public class SpringValueAnimation:ValueAnimation {
-  var threshold:CGFloat = 0.001
-  var stiffness:CGFloat = 150
-  var damping:CGFloat = 10
+  public var threshold:CGFloat = 0.001
+  public var stiffness:CGFloat = 150
+  public var damping:CGFloat = 10
   
   //from https://github.com/chenglou/react-motion
-  override func update(dt:CGFloat) -> Bool{
+  public override func update(dt:CGFloat) -> Bool{
     let x = getter?() ?? 0
 
     // Force

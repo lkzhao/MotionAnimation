@@ -12,9 +12,9 @@ import UIKit.UIGestureRecognizerSubclass
 
 public class LZPanGestureRecognizer: UIPanGestureRecognizer {
   
-  var startViewCenterPoint:CGPoint?
+  public var startViewCenterPoint:CGPoint?
   
-  var translatedViewCenterPoint:CGPoint{
+  public var translatedViewCenterPoint:CGPoint{
     if let startViewCenterPoint = startViewCenterPoint{
       var p = startViewCenterPoint + translationInView(self.view!.superview!)
       p.x = clamp(p.x, range:xRange, overflowScale:xOverflowScale)
@@ -25,7 +25,7 @@ public class LZPanGestureRecognizer: UIPanGestureRecognizer {
     }
   }
 
-  func clamp(element: CGFloat, range:ClosedInterval<CGFloat>, overflowScale:CGFloat = 0) -> CGFloat {
+  public func clamp(element: CGFloat, range:ClosedInterval<CGFloat>, overflowScale:CGFloat = 0) -> CGFloat {
     if element < range.start{
       return range.start - (range.start - element)*overflowScale
     } else if element > range.end{
@@ -34,10 +34,10 @@ public class LZPanGestureRecognizer: UIPanGestureRecognizer {
     return element
   }
 
-  var xOverflowScale:CGFloat = 0.3
-  var yOverflowScale:CGFloat = 0.3
-  var xRange:ClosedInterval<CGFloat> = CGFloat.min...CGFloat.max
-  var yRange:ClosedInterval<CGFloat> = CGFloat.min...CGFloat.max
+  public var xOverflowScale:CGFloat = 0.3
+  public var yOverflowScale:CGFloat = 0.3
+  public var xRange:ClosedInterval<CGFloat> = CGFloat.min...CGFloat.max
+  public var yRange:ClosedInterval<CGFloat> = CGFloat.min...CGFloat.max
   
   override public func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent) {
     super.touchesBegan(touches, withEvent: event)

@@ -17,7 +17,7 @@ public enum MotionAnimationValueObserver{
   case CGFloatMultiObserver(([CGFloat]) -> Void)
   case UIColorObserver((UIColor) -> Void)
   
-  var valueType:MotionAnimationValueType{
+  public var valueType:MotionAnimationValueType{
     switch self{
     case .CGFloatObserver:
       return .CGFloatValue
@@ -32,7 +32,7 @@ public enum MotionAnimationValueObserver{
     }
   }
   
-  func executeWithValues(values:[CGFloat]){
+  public func executeWithValues(values:[CGFloat]){
     switch self{
     case .CGFloatObserver(let cb):
       cb(values[0])
@@ -62,7 +62,7 @@ public enum MotionAnimationValue{
   case CGFloatMultiValue([CGFloat])
   case UIColorValue(UIColor)
   
-  static func valueFromCGFloatValues(values:[CGFloat], withType type:MotionAnimationValueType) -> MotionAnimationValue{
+  public static func valueFromCGFloatValues(values:[CGFloat], withType type:MotionAnimationValueType) -> MotionAnimationValue{
     switch type{
     case .CGFloatValue:
       return .CGFloatValue(values[0])
@@ -76,7 +76,7 @@ public enum MotionAnimationValue{
       return .UIColorValue(UIColor(red: values[0], green: values[1], blue: values[2], alpha: values[3]))
     }
   }
-  static func valueFromRawValue(value:AnyObject, withType type:MotionAnimationValueType) -> MotionAnimationValue{
+  public static func valueFromRawValue(value:AnyObject, withType type:MotionAnimationValueType) -> MotionAnimationValue{
     switch type{
     case .CGFloatValue:
       return .CGFloatValue(CGFloat(value.floatValue!))
@@ -90,7 +90,7 @@ public enum MotionAnimationValue{
       return .UIColorValue(value as! UIColor)
     }
   }
-  var type:MotionAnimationValueType{
+  public var type:MotionAnimationValueType{
     switch self{
     case .CGFloatValue:
       return .CGFloatValue
@@ -104,7 +104,7 @@ public enum MotionAnimationValue{
       return .UIColorValue
     }
   }
-  func getCGFloatValues() -> [CGFloat]{
+  public func getCGFloatValues() -> [CGFloat]{
     switch self{
     case .CGFloatValue(let v):
       return [v]
@@ -123,7 +123,7 @@ public enum MotionAnimationValue{
       return [r,g,b,a]
     }
   }
-  func rawValue() -> AnyObject{
+  public func rawValue() -> AnyObject{
     switch self{
     case .CGFloatValue(let v):
       return v

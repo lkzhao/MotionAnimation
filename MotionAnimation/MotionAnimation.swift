@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol MotionAnimationDelegate{
+public protocol MotionAnimationDelegate{
   func animationDidStop(animation:MotionAnimation)
   func animationDidPerformStep(animation:MotionAnimation)
 }
@@ -18,11 +18,11 @@ public class MotionAnimation: NSObject {
   internal weak var parentAnimation:MotionAnimation?
   internal var childAnimations:[MotionAnimation] = []
   
-  var delegate:MotionAnimationDelegate?
-  var onCompletion:((animation:MotionAnimation) -> Void)?
-  var onUpdate:((animation:MotionAnimation) -> Void)?
+  public var delegate:MotionAnimationDelegate?
+  public var onCompletion:((animation:MotionAnimation) -> Void)?
+  public var onUpdate:((animation:MotionAnimation) -> Void)?
 
-  var playing:Bool{
+  public var playing:Bool{
     return MotionAnimator.sharedInstance.hasAnimation(self)
   }
   
@@ -31,20 +31,20 @@ public class MotionAnimation: NSObject {
     MotionAnimator.sharedInstance.addAnimation(self)
   }
   
-  func addChildBehavior(b:MotionAnimation){
+  public func addChildBehavior(b:MotionAnimation){
     if childAnimations.indexOf(b) == nil{
       childAnimations.append(b)
       b.parentAnimation = self
     }
   }
   
-  func play(){
+  public func play(){
     if parentAnimation == nil{
       MotionAnimator.sharedInstance.addAnimation(self)
     }
   }
   
-  func stop(){
+  public func stop(){
     if parentAnimation == nil{
       MotionAnimator.sharedInstance.removeAnimation(self)
     }
@@ -53,7 +53,7 @@ public class MotionAnimation: NSObject {
   // returning true means require next update(not yet reached target state)
   // behaviors can call animator.addAnimation to wake up the animator when
   // the target value changed
-  func update(dt:CGFloat) -> Bool{
+  public func update(dt:CGFloat) -> Bool{
     var running = false
     for c in childAnimations{
       if c.update(dt){
