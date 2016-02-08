@@ -8,9 +8,37 @@
 
 import UIKit
 
+class MotionAnimationMultiValueObserver:NSObject, MotionAnimatorObserver{
+  var observedKeys:[NSObject:[String:MotionAnimationObserverKey]]!
+
+  var _updatedKeys:[NSObject:[String]] = [:]
+
+  var callback:((updatedObjectAndKeys:[NSObject:[String]])->Void)!
+  func object(object:NSObject, didUpdateKey key:String){
+    if observedKeys[object]?[key] != nil{
+      if _updatedKeys[object] == nil{
+        _updatedKeys[object] = []
+      }
+      _updatedKeys[object]!.append(key)
+    }
+  }
+  func cleanup(){
+    for (o, callbacks) in observedKeys{
+      for (key, observerKey) in callbacks{
+        o.m_removeCallback(key, observerKey: observerKey)
+      }
+    }
+  }
+  func animatorDidUpdate(animator: MotionAnimator, dt: CGFloat) {
+    callback(updatedObjectAndKeys:_updatedKeys)
+    _updatedKeys = [:]
+  }
+}
+
 public extension NSObject{
   private struct m_associatedKeys {
     static var m_propertyStates = "m_propertyStates_key"
+    static var m_multiValueObservers = "m_multiValueObservers_key"
   }
   private var m_propertyStates:[String:MotionAnimationPropertyState]{
     get {
@@ -19,6 +47,23 @@ public extension NSObject{
       }
       self.m_propertyStates = [:]
       return objc_getAssociatedObject(self, &m_associatedKeys.m_propertyStates) as! [String:MotionAnimationPropertyState]
+    }
+    set {
+      objc_setAssociatedObject(
+        self,
+        &m_associatedKeys.m_propertyStates,
+        newValue,
+        .OBJC_ASSOCIATION_RETAIN_NONATOMIC
+      )
+    }
+  }
+  private var m_multiValueObservers:[MotionAnimationObserverKey:MotionAnimationMultiValueObserver]{
+    get {
+      if let rtn = objc_getAssociatedObject(self, &m_associatedKeys.m_propertyStates) as? [MotionAnimationObserverKey:MotionAnimationMultiValueObserver]{
+        return rtn
+      }
+      self.m_propertyStates = [:]
+      return objc_getAssociatedObject(self, &m_associatedKeys.m_propertyStates) as! [MotionAnimationObserverKey:MotionAnimationMultiValueObserver]
     }
     set {
       objc_setAssociatedObject(
@@ -56,7 +101,30 @@ public extension NSObject{
   func m_addVelocityUpdateCallback(key:String, velocityUpdateCallback:MotionAnimationValueObserver) -> MotionAnimationObserverKey{
     return getPropertyState(key).addVelocityUpdateCallback(velocityUpdateCallback)
   }
-  func m_removeCallback(key:String, observerKey:MotionAnimationValueObserverKey){
+  static func m_addCallbackForAnyValueUpdated(objects:[NSObject:[String]], callback:(([NSObject:[String]]) ->Void) ) -> MotionAnimationObserverKey{
+    let multiValueOb = MotionAnimationMultiValueObserver()
+    multiValueOb.callback = callback
+    var observedKeys:[NSObject:[String:MotionAnimationObserverKey]] = [:]
+    for (o, keys) in objects{
+      var observedKeysForObject:[String:MotionAnimationObserverKey] = [:]
+      for key in keys{
+        observedKeysForObject[key] = o.getPropertyState(key).addValueUpdateCallback(.CGFloatMultiObserver({ _ in
+          multiValueOb.object(o, didUpdateKey: key)
+        }))
+      }
+      observedKeys[o] = observedKeysForObject
+    }
+    multiValueOb.observedKeys = observedKeys;
+    return MotionAnimator.sharedInstance.addUpdateObserver(multiValueOb)
+  }
+  static func m_removeMultiValueObserver(observerKey:MotionAnimationObserverKey){
+    if let multiValueOb = MotionAnimator.sharedInstance.observerWithKey(observerKey) as? MotionAnimationMultiValueObserver{
+      MotionAnimator.sharedInstance.removeUpdateObserverWithKey(observerKey)
+      multiValueOb.cleanup()
+    }
+  }
+  
+  func m_removeCallback(key:String, observerKey:MotionAnimationObserverKey){
     getPropertyState(key).removeCallback(observerKey)
   }
   

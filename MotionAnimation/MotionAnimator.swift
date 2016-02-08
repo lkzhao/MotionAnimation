@@ -7,10 +7,14 @@
 //
 
 import UIKit
+@objc
+public protocol MotionAnimatorObserver{
+  func animatorDidUpdate(animator:MotionAnimator, dt:CGFloat)
+}
 
 public class MotionAnimator: NSObject {
   public static let sharedInstance = MotionAnimator()
-  var updateCallbacks:[NSUUID:((dt:CGFloat)->Void)] = [:]
+  var updateObservers:[MotionAnimationObserverKey:MotionAnimatorObserver] = [:]
   
   public var debugEnabled = false
   var displayLinkPaused:Bool{
@@ -51,19 +55,23 @@ public class MotionAnimator: NSObject {
     if animations.count == 0{
       displayLinkPaused = true
     }
-    for (_, callback) in updateCallbacks{
-      callback(dt:duration)
+    for (_, o) in updateObservers{
+      o.animatorDidUpdate(self, dt: duration)
     }
   }
 
-  public func addUpdateCallback(callback:(dt:CGFloat)->Void) -> MotionAnimationObserverKey{
-    let uuid = NSUUID()
-    self.updateCallbacks[uuid] = callback
-    return uuid
+  public func addUpdateObserver(observer:MotionAnimatorObserver) -> MotionAnimationObserverKey {
+    let key = NSUUID()
+    updateObservers[key] = observer
+    return key
   }
   
-  public func removeUpdateCallback(key:MotionAnimationObserverKey) {
-    self.updateCallbacks.removeValueForKey(key)
+  public func observerWithKey(observerKey:MotionAnimationObserverKey) -> MotionAnimatorObserver? {
+    return updateObservers[observerKey]
+  }
+  
+  public func removeUpdateObserverWithKey(observerKey:MotionAnimationObserverKey) {
+    updateObservers.removeValueForKey(observerKey)
   }
 
   public func addAnimation(b:MotionAnimation){
