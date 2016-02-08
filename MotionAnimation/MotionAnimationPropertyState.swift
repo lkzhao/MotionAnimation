@@ -98,19 +98,19 @@ internal class MotionAnimationPropertyState: MotionAnimationDelegate{
       anim.target = toValues.getCGFloatValues()
   }
   
-  func addVelocityUpdateCallback(velocityUpdateCallback:MotionAnimationVelocityObserver) -> MotionAnimationValueObserverKey{
+  func addVelocityUpdateCallback(velocityUpdateCallback:MotionAnimationVelocityObserver) -> MotionAnimationObserverKey{
     let uuid = NSUUID()
     self.velocityUpdateCallbacks[uuid] = velocityUpdateCallback
     return uuid
   }
   
-  func addValueUpdateCallback(valueUpdateCallback:MotionAnimationValueObserver) -> MotionAnimationValueObserverKey{
+  func addValueUpdateCallback(valueUpdateCallback:MotionAnimationValueObserver) -> MotionAnimationObserverKey{
     let uuid = NSUUID()
     self.valueUpdateCallbacks[uuid] = valueUpdateCallback
     return uuid
   }
   
-  func removeCallback(key:MotionAnimationValueObserverKey) -> MotionAnimationValueObserver? {
+  func removeCallback(key:MotionAnimationObserverKey) -> MotionAnimationValueObserver? {
     return self.valueUpdateCallbacks.removeValueForKey(key) ?? self.velocityUpdateCallbacks.removeValueForKey(key)
   }
   

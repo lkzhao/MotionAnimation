@@ -50,11 +50,14 @@ public extension NSObject{
   }
   
   // add callbacks
-  func m_addValueUpdateCallback(key:String, valueUpdateCallback:MotionAnimationValueObserver){
-    getPropertyState(key).addValueUpdateCallback(valueUpdateCallback)
+  func m_addValueUpdateCallback(key:String, valueUpdateCallback:MotionAnimationValueObserver) -> MotionAnimationObserverKey{
+    return getPropertyState(key).addValueUpdateCallback(valueUpdateCallback)
   }
-  func m_addVelocityUpdateCallback(key:String, velocityUpdateCallback:MotionAnimationValueObserver){
-    getPropertyState(key).addVelocityUpdateCallback(velocityUpdateCallback)
+  func m_addVelocityUpdateCallback(key:String, velocityUpdateCallback:MotionAnimationValueObserver) -> MotionAnimationObserverKey{
+    return getPropertyState(key).addVelocityUpdateCallback(velocityUpdateCallback)
+  }
+  func m_removeCallback(key:String, observerKey:MotionAnimationValueObserverKey){
+    getPropertyState(key).removeCallback(observerKey)
   }
   
   // animation

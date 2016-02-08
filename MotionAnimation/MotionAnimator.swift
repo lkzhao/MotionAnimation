@@ -10,6 +10,7 @@ import UIKit
 
 public class MotionAnimator: NSObject {
   public static let sharedInstance = MotionAnimator()
+  var updateCallbacks:[NSUUID:((dt:CGFloat)->Void)] = [:]
   
   public var debugEnabled = false
   var displayLinkPaused:Bool{
@@ -29,8 +30,9 @@ public class MotionAnimator: NSObject {
   }
   
   func update() {
+    let duration = CGFloat(displayLink.duration)
     for b in animations{
-      if !b.update(CGFloat(displayLink.duration)){
+      if !b.update(duration){
         pendingStopAnimations.append(b)
       }
       b.delegate?.animationDidPerformStep(b)
@@ -49,8 +51,21 @@ public class MotionAnimator: NSObject {
     if animations.count == 0{
       displayLinkPaused = true
     }
+    for (_, callback) in updateCallbacks{
+      callback(dt:duration)
+    }
+  }
+
+  public func addUpdateCallback(callback:(dt:CGFloat)->Void) -> MotionAnimationObserverKey{
+    let uuid = NSUUID()
+    self.updateCallbacks[uuid] = callback
+    return uuid
   }
   
+  public func removeUpdateCallback(key:MotionAnimationObserverKey) {
+    self.updateCallbacks.removeValueForKey(key)
+  }
+
   public func addAnimation(b:MotionAnimation){
     if animations.indexOf(b) == nil {
       animations.append(b)

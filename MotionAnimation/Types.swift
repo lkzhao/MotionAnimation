@@ -8,7 +8,7 @@
 
 import UIKit
 
-typealias MotionAnimationValueObserverKey = NSUUID
+public typealias MotionAnimationObserverKey = NSUUID
 
 public enum MotionAnimationValueObserver{
   case CGFloatObserver((CGFloat) -> Void)
