@@ -21,14 +21,20 @@ public class MotionAnimation: NSObject {
   public var delegate:MotionAnimationDelegate?
   public var onCompletion:((animation:MotionAnimation) -> Void)?
   public var onUpdate:((animation:MotionAnimation) -> Void)?
+  public var willStartPlaying:(()->Void)? = nil
 
   public var playing:Bool{
     return MotionAnimator.sharedInstance.hasAnimation(self)
   }
   
-  override init() {
+  override public init() {
     super.init()
-    MotionAnimator.sharedInstance.addAnimation(self)
+    play()
+  }
+  
+  public init(playImmediately:Bool) {
+    super.init()
+    if playImmediately { play() }
   }
   
   public func addChildBehavior(b:MotionAnimation){
@@ -39,7 +45,8 @@ public class MotionAnimation: NSObject {
   }
   
   public func play(){
-    if parentAnimation == nil{
+    if parentAnimation == nil && !playing{
+      willStartPlaying?()
       MotionAnimator.sharedInstance.addAnimation(self)
     }
   }

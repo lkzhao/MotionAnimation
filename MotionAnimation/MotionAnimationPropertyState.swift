@@ -98,6 +98,10 @@ internal class MotionAnimationPropertyState: MotionAnimationDelegate{
       anim.target = toValues.getCGFloatValues()
   }
   
+  func stop() {
+    animation?.stop()
+  }
+
   func addVelocityUpdateCallback(velocityUpdateCallback:MotionAnimationVelocityObserver) -> MotionAnimationObserverKey{
     let uuid = NSUUID()
     self.velocityUpdateCallbacks[uuid] = velocityUpdateCallback

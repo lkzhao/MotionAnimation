@@ -93,6 +93,9 @@ public extension NSObject{
     m_propertyStates[key] = MotionAnimationPropertyState(values: initialValues)
     getPropertyState(key).addValueUpdateCallback(.CGFloatMultiObserver(valueUpdateCallback))
   }
+  func m_removeAnimationForKey(key:String){
+    getPropertyState(key).stop()
+  }
   
   // add callbacks
   func m_addValueUpdateCallback(key:String, valueUpdateCallback:MotionAnimationValueObserver) -> MotionAnimationObserverKey{

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A3B6FB591C7A310A003A4FD4 /* UIView+MotionAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B6FB581C7A310A003A4FD4 /* UIView+MotionAnimation.swift */; };
 		A3D92B261C6803C000C34FBD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D92B251C6803C000C34FBD /* AppDelegate.swift */; };
 		A3D92B2D1C6803C000C34FBD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3D92B2C1C6803C000C34FBD /* Assets.xcassets */; };
 		A3D92B301C6803C000C34FBD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3D92B2E1C6803C000C34FBD /* LaunchScreen.storyboard */; };
@@ -28,6 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A3B6FB581C7A310A003A4FD4 /* UIView+MotionAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+MotionAnimation.swift"; sourceTree = "<group>"; };
 		A3D92B221C6803C000C34FBD /* MotionAnimationExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MotionAnimationExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3D92B251C6803C000C34FBD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A3D92B2C1C6803C000C34FBD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 				A3D92B561C68096900C34FBD /* MotionAnimationPropertyState.swift */,
 				A3D92B571C68096900C34FBD /* MotionAnimator.swift */,
 				A3D92B581C68096900C34FBD /* NSObject+MotionAnimation.swift */,
+				A3B6FB581C7A310A003A4FD4 /* UIView+MotionAnimation.swift */,
 				A3D92B591C68096900C34FBD /* NSTimer.swift */,
 				A3D92B5A1C68096900C34FBD /* SpringValueAnimation.swift */,
 				A3D92B5B1C68096900C34FBD /* time.swift */,
@@ -211,6 +214,7 @@
 				A3D92B5E1C68096900C34FBD /* CGPoint+Util.swift in Sources */,
 				A3D92B671C68096900C34FBD /* Types.swift in Sources */,
 				A3D92B661C68096900C34FBD /* time.swift in Sources */,
+				A3B6FB591C7A310A003A4FD4 /* UIView+MotionAnimation.swift in Sources */,
 				A3D92B651C68096900C34FBD /* SpringValueAnimation.swift in Sources */,
 				A3D92B261C6803C000C34FBD /* AppDelegate.swift in Sources */,
 				A3D92B681C68096900C34FBD /* ValueAnimation.swift in Sources */,
