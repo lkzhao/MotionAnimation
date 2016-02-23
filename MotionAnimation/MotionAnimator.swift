@@ -75,7 +75,9 @@ public class MotionAnimator: NSObject {
   }
 
   public func addAnimation(b:MotionAnimation){
-    if animations.indexOf(b) == nil {
+    if let index = pendingStopAnimations.indexOf(b){
+      pendingStopAnimations.removeAtIndex(index)
+    } else if animations.indexOf(b) == nil {
       animations.append(b)
       b.animator = self
       if displayLinkPaused {
@@ -84,7 +86,7 @@ public class MotionAnimator: NSObject {
     }
   }
   public func hasAnimation(b:MotionAnimation) -> Bool{
-    return animations.indexOf(b) != nil
+    return animations.indexOf(b) != nil && pendingStopAnimations.indexOf(b) == nil
   }
   public func removeAnimation(b:MotionAnimation){
     if animations.indexOf(b) != nil {
