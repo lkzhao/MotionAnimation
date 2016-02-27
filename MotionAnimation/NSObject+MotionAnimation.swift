@@ -137,6 +137,9 @@ public extension NSObject{
       completion()
     }
   }
+  func m_isAnimating(key:String) -> Bool{
+    return getPropertyState(key).animation?.playing ?? false
+  }
   func m_animate(
     key:String,
     to:UIColor,

@@ -44,7 +44,7 @@ public class PositionAnimation:MotionAnimation{
     let lowVelocity = abs(newV.x) < threshold && abs(newV.y) < threshold
     if lowVelocity && abs(targetPosition.x - newPosition.x) < threshold && abs(targetPosition.y - newPosition.y) < threshold {
       velocity = CGPointZero
-      view.position = targetPosition
+        view.position = targetPosition
       return false
     } else {
       velocity = newV
