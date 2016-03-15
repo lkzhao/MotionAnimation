@@ -9,49 +9,30 @@
 import UIKit
 
 
-/* 
+/*
  *
  */
 
-internal class MotionAnimationPropertyState: MotionAnimationDelegate{
-  private enum ValueStore{
-    case ObjectKeyPath(obj:NSObject, keyPath:String)
-    case Values(values:[CGFloat])
-    func valuesWithType(type:MotionAnimationValueType) -> [CGFloat]{
-      switch self{
-      case .ObjectKeyPath(let obj, let keyPath):
-        let v = obj.valueForKeyPath(keyPath)!
-        return MotionAnimationValue.valueFromRawValue(v, withType: type).getCGFloatValues()
-      case .Values(let values):
-        return values
-      }
-    }
-    mutating func setValue(values:[CGFloat], withType type:MotionAnimationValueType){
-      let value = MotionAnimationValue.valueFromCGFloatValues(values, withType: type)
-      switch self{
-      case .ObjectKeyPath(let obj, let keyPath):
-        obj.setValue(value.rawValue(), forKey: keyPath)
-      case .Values:
-        self = .Values(values: value.getCGFloatValues())
-      }
-    }
-  }
+internal class MotionAnimationPropertyState:NSObject, MotionAnimationDelegate{
+
   var velocityUpdateCallbacks:[NSUUID:MotionAnimationVelocityObserver] = [:]
   var valueUpdateCallbacks:[NSUUID:MotionAnimationValueObserver] = [:]
-  
+
   var animation:MotionAnimation?
-  
-  private var _objectKeyPath:(NSObject, String)?
-  private var valueStore:ValueStore
-  
+
+  private weak var object:NSObject?
+  private var keyPath:String?
+  private var values:[CGFloat] = []
+
   init(values:[CGFloat]){
-    valueStore = .Values(values: values)
+    self.values = values
   }
-  
+
   init(obj:NSObject, keyPath:String){
-    valueStore = .ObjectKeyPath(obj: obj, keyPath: keyPath)
+    self.object = obj
+    self.keyPath = keyPath
   }
-  
+
   private var _tempVelocityUpdate: MotionAnimationVelocityObserver?
   private var _tempValueUpdate: MotionAnimationValueObserver?
   private var _tempCompletion: (() -> Void)?
@@ -63,43 +44,57 @@ internal class MotionAnimationPropertyState: MotionAnimationDelegate{
     valueUpdate:MotionAnimationValueObserver? = nil,
     velocityUpdate:MotionAnimationVelocityObserver? = nil,
     completion:(() -> Void)? = nil) {
-      
-      let anim:MultiValueAnimation
-      if let animation = animation as? MultiValueAnimation{
-        anim = animation
-        if damping != nil || stiffness != nil || threshold != nil{
-          anim.loop{ childAnimation, i in
-            if let spring = childAnimation as? SpringValueAnimation{
-              spring.damping = damping ?? spring.damping
-              spring.stiffness = stiffness ?? spring.stiffness
-              spring.threshold = threshold ?? spring.threshold
-            }
+
+    let anim:MultiValueAnimation
+    if let animation = animation as? MultiValueAnimation{
+      anim = animation
+      if damping != nil || stiffness != nil || threshold != nil{
+        anim.loop{ childAnimation, i in
+          if let spring = childAnimation as? SpringValueAnimation{
+            spring.damping = damping ?? spring.damping
+            spring.stiffness = stiffness ?? spring.stiffness
+            spring.threshold = threshold ?? spring.threshold
           }
         }
-      }else{
-        animation?.stop()
-        anim = MultiValueAnimation(animationFactory: {
-          let spring = SpringValueAnimation()
-          spring.damping = damping ?? spring.damping
-          spring.stiffness = stiffness ?? spring.stiffness
-          spring.threshold = threshold ?? spring.threshold
-          return spring
-          }, getter: {
-            return self.valueStore.valuesWithType(toValues.type)
-          }, setter: { newValues in
-            self.valueStore.setValue(newValues, withType: toValues.type)
-          }, target: toValues.getCGFloatValues())
-        animation = anim
       }
-      _tempVelocityUpdate = velocityUpdate
-      _tempValueUpdate = valueUpdate
-      _tempCompletion = completion
-      anim.delegate = self
-      anim.target = toValues.getCGFloatValues()
+    }else{
+      animation?.stop()
+      anim = MultiValueAnimation(animationFactory: {
+        let spring = SpringValueAnimation()
+        spring.damping = damping ?? spring.damping
+        spring.stiffness = stiffness ?? spring.stiffness
+        spring.threshold = threshold ?? spring.threshold
+        return spring
+        }, getter: {
+          self.getValuesWithType(toValues.type)
+        }, setter: { newValues in
+          if let obj = self.object, keyPath = self.keyPath{
+            let value = MotionAnimationValue.valueFromCGFloatValues(newValues, withType: toValues.type)
+            obj.setValue(value.rawValue(), forKey: keyPath)
+          } else {
+            self.values = newValues
+          }
+        }, target: toValues.getCGFloatValues())
+      animation = anim
+    }
+    _tempVelocityUpdate = velocityUpdate
+    _tempValueUpdate = valueUpdate
+    _tempCompletion = completion
+    anim.delegate = self
+    anim.target = toValues.getCGFloatValues()
   }
-  
+
   func stop() {
     animation?.stop()
+  }
+
+  func getValuesWithType(type:MotionAnimationValueType) -> [CGFloat] {
+    if let obj = self.object, keyPath = self.keyPath{
+      let v = obj.valueForKeyPath(keyPath)!
+      return MotionAnimationValue.valueFromRawValue(v, withType: type).getCGFloatValues()
+    } else {
+      return self.values
+    }
   }
 
   func addVelocityUpdateCallback(velocityUpdateCallback:MotionAnimationVelocityObserver) -> MotionAnimationObserverKey{
@@ -107,19 +102,19 @@ internal class MotionAnimationPropertyState: MotionAnimationDelegate{
     self.velocityUpdateCallbacks[uuid] = velocityUpdateCallback
     return uuid
   }
-  
+
   func addValueUpdateCallback(valueUpdateCallback:MotionAnimationValueObserver) -> MotionAnimationObserverKey{
     let uuid = NSUUID()
     self.valueUpdateCallbacks[uuid] = valueUpdateCallback
     return uuid
   }
-  
+
   func removeCallback(key:MotionAnimationObserverKey) -> MotionAnimationValueObserver? {
     return self.valueUpdateCallbacks.removeValueForKey(key) ?? self.velocityUpdateCallbacks.removeValueForKey(key)
   }
-  
+
   internal func setValues(values:[CGFloat]){
-    self.valueStore.setValue(values, withType: .CGFloatMultiValue)
+    self.values = values
   }
 
   internal func animationDidStop(animation:MotionAnimation){
@@ -130,7 +125,7 @@ internal class MotionAnimationPropertyState: MotionAnimationDelegate{
       _tempCompletion()
     }
   }
-  
+
   internal func animationDidPerformStep(animation:MotionAnimation){
     if velocityUpdateCallbacks.count > 0 || _tempVelocityUpdate != nil{
       let v = (animation as! MultiValueAnimation).velocity
@@ -141,13 +136,13 @@ internal class MotionAnimationPropertyState: MotionAnimationDelegate{
     }
     valueUpdated()
   }
-  
+
   internal func valueUpdated(){
     for (_, callback) in valueUpdateCallbacks{
-      callback.executeWithValues(valueStore.valuesWithType(callback.valueType))
+      callback.executeWithValues(getValuesWithType(callback.valueType))
     }
     if let _tempValueUpdate = _tempValueUpdate{
-      _tempValueUpdate.executeWithValues(valueStore.valuesWithType(_tempValueUpdate.valueType))
+      _tempValueUpdate.executeWithValues(getValuesWithType(_tempValueUpdate.valueType))
     }
   }
 }

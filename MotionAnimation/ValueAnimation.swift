@@ -85,10 +85,12 @@ public class MultiValueAnimation:MotionAnimation {
     for (i, t) in target.enumerate(){
       let b = animationFactory()
       b.getter = {
-        return self.current[i]
+        return self.current.count > i ? self.current[i] : 0
       }
       b.setter = {
-        self.current[i] = $0
+        if self.current.count > i{
+            self.current[i] = $0
+        }
       }
       b.target = t
       addChildBehavior(b)

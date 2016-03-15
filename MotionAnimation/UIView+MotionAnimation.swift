@@ -7,11 +7,11 @@
 //
 
 import UIKit
-public protocol PositionAnimatable{
+@objc public protocol PositionAnimatable{
   var position:CGPoint{get set}
 }
 public class PositionAnimation:MotionAnimation{
-  var view:PositionAnimatable
+  weak var view:PositionAnimatable?
   init(view:PositionAnimatable) {
     self.view = view
     super.init()
@@ -28,6 +28,7 @@ public class PositionAnimation:MotionAnimation{
   }
 
   override public func update(dt:CGFloat) -> Bool{
+    guard var view = view else { return true }
     let position = view.position
     
     // Force

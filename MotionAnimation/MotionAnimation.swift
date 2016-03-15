@@ -39,6 +39,7 @@ public class MotionAnimation: NSObject {
   
   public func addChildBehavior(b:MotionAnimation){
     if childAnimations.indexOf(b) == nil{
+      b.stop()
       childAnimations.append(b)
       b.parentAnimation = self
     }
