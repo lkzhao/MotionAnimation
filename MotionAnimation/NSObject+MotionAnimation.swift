@@ -104,6 +104,7 @@ public extension NSObject{
   func m_addVelocityUpdateCallback(key:String, velocityUpdateCallback:MotionAnimationValueObserver) -> MotionAnimationObserverKey{
     return getPropertyState(key).addVelocityUpdateCallback(velocityUpdateCallback)
   }
+
   static func m_addCallbackForAnyValueUpdated(objects:[NSObject:[String]], callback:(([NSObject:[String]]) ->Void) ) -> MotionAnimationObserverKey{
     let multiValueOb = MotionAnimationMultiValueObserver()
     multiValueOb.callback = callback

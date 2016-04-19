@@ -11,8 +11,8 @@ import UIKit
 public typealias CGFloatValueGetterBlock = (() -> CGFloat)
 public typealias CGFloatValueSetterBlock = ((CGFloat) -> Void)
 public class ValueAnimation:MotionAnimation {
-  public var getter:CGFloatValueGetterBlock?
-  public var setter:CGFloatValueSetterBlock?
+  private var getter:CGFloatValueGetterBlock?
+  private var setter:CGFloatValueSetterBlock?
   public var target:CGFloat = 0{
     didSet{
       if target != getter?(){
@@ -31,6 +31,15 @@ public class ValueAnimation:MotionAnimation {
     self.getter = getter
     self.setter = setter
     self.target = target
+  }
+
+  public var value:CGFloat = 0
+
+  override public func willUpdate() {
+    value = getter?() ?? 0
+  }
+  override public func didUpdate() {
+    setter?(value)
   }
 }
 
@@ -67,12 +76,7 @@ public class MultiValueAnimation:MotionAnimation {
   public var current:[CGFloat] = [0]
   
   public override func update(dt: CGFloat) -> Bool {
-    if let p = getter?(){
-      current = p
-    }
-    let running = super.update(dt)
-    setter?(current)
-    return running
+    return super.update(dt)
   }
   
   public init(animationFactory:ValueAnimationFactory, getter:CGFloatValuesGetterBlock, setter:CGFloatValuesSetterBlock, target:[CGFloat]) {
@@ -95,5 +99,15 @@ public class MultiValueAnimation:MotionAnimation {
       b.target = t
       addChildBehavior(b)
     }
+  }
+
+  override public func willUpdate() {
+    if let p = getter?(){
+      current = p
+    }
+  }
+  override public func didUpdate() {
+    super.didUpdate()
+    setter?(current)
   }
 }

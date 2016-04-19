@@ -27,35 +27,40 @@ public class PositionAnimation:MotionAnimation{
     play()
   }
 
+
+  private var position:CGPoint = CGPointZero
+  override public func willUpdate() {
+    position = view?.position ?? CGPointZero
+  }
+  override public func didUpdate() {
+    view?.position = position
+  }
   override public func update(dt:CGFloat) -> Bool{
-    guard var view = view else { return true }
-    let position = view.position
-    
     // Force
     let Fspring = -stiffness * (position - targetPosition)
-    
+
     // Damping
     let Fdamper = -damping * velocity;
-    
+
     let a = Fspring + Fdamper;
-    
+
     let newV = velocity + a * dt;
     let newPosition = position + newV * dt;
-    
+
     let lowVelocity = abs(newV.x) < threshold && abs(newV.y) < threshold
     if lowVelocity && abs(targetPosition.x - newPosition.x) < threshold && abs(targetPosition.y - newPosition.y) < threshold {
       velocity = CGPointZero
-        view.position = targetPosition
+      position = self.targetPosition
       return false
     } else {
       velocity = newV
-      view.position = newPosition
+      position = newPosition
       return true
     }
   }
 }
 
-extension UIView: PositionAnimatable {
+extension UIView: PositionAnimatable, MotionAnimationDelegate {
   public var position:CGPoint{
     get{
       return center
@@ -68,12 +73,14 @@ extension UIView: PositionAnimatable {
   private struct m_uiview_associatedKeys {
     static var m_centerAnimation = "m_centerAnimation_key"
   }
-  private var centerAnimation:PositionAnimation!{
+
+  public var centerAnimation:PositionAnimation!{
     get {
       if let rtn = objc_getAssociatedObject(self, &m_uiview_associatedKeys.m_centerAnimation) as? PositionAnimation{
         return rtn
       }
       self.centerAnimation = PositionAnimation(view: self)
+      self.centerAnimation.delegate = self
       return objc_getAssociatedObject(self, &m_uiview_associatedKeys.m_centerAnimation) as! PositionAnimation
     }
     set {
@@ -92,6 +99,7 @@ extension UIView: PositionAnimatable {
     damping:CGFloat? = nil,
     threshold:CGFloat? = nil,
     completion:(() -> Void)? = nil) {
+      centerAnimation.onCompletion?(animation:centerAnimation)
       if let threshold = threshold{
         centerAnimation.threshold = threshold
       }
@@ -108,6 +116,14 @@ extension UIView: PositionAnimatable {
         }
       }
       centerAnimation.animationToTargetPosition(point)
+  }
+
+  public func animationDidPerformStep(animation: MotionAnimation) {
+
+  }
+
+  public func animationDidStop(animation: MotionAnimation) {
+
   }
 
   public func stopAllAnimation(){

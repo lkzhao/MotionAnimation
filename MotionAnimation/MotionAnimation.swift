@@ -8,7 +8,7 @@
 
 import UIKit
 
-public protocol MotionAnimationDelegate{
+@objc public protocol MotionAnimationDelegate{
   func animationDidStop(animation:MotionAnimation)
   func animationDidPerformStep(animation:MotionAnimation)
 }
@@ -18,7 +18,7 @@ public class MotionAnimation: NSObject {
   internal weak var parentAnimation:MotionAnimation?
   internal var childAnimations:[MotionAnimation] = []
   
-  public var delegate:MotionAnimationDelegate?
+  weak public var delegate:MotionAnimationDelegate?
   public var onCompletion:((animation:MotionAnimation) -> Void)?
   public var onUpdate:((animation:MotionAnimation) -> Void)?
   public var willStartPlaying:(()->Void)? = nil
@@ -57,7 +57,13 @@ public class MotionAnimation: NSObject {
       MotionAnimator.sharedInstance.removeAnimation(self)
     }
   }
-  
+
+  public func willUpdate() {
+    for c in childAnimations{
+      c.willUpdate()
+    }
+  }
+
   // returning true means require next update(not yet reached target state)
   // behaviors can call animator.addAnimation to wake up the animator when
   // the target value changed
@@ -69,5 +75,12 @@ public class MotionAnimation: NSObject {
       }
     }
     return running
+  }
+
+  // this will be called on main thread. sync value back to the animated object
+  public func didUpdate(){
+    for c in childAnimations{
+      c.didUpdate()
+    }
   }
 }
