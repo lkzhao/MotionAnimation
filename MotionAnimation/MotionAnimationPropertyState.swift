@@ -20,24 +20,24 @@ internal class MotionAnimationPropertyState:NSObject, MotionAnimationDelegate{
 
   var animation:MotionAnimation?
 
-  private weak var object:NSObject?
-  private var keyPath:String?
-  private var values:[CGFloat] = []
+  private var getter:CGFloatValueBlock?
+  private var setter:CGFloatValueBlock?
+  private var values:[CGFloat]?
 
   init(values:[CGFloat]){
     self.values = values
   }
 
-  init(obj:NSObject, keyPath:String){
-    self.object = obj
-    self.keyPath = keyPath
+  init(getter:CGFloatValueBlock, setter:CGFloatValueBlock){
+    self.getter = getter
+    self.setter = setter
   }
 
   private var _tempVelocityUpdate: MotionAnimationVelocityObserver?
   private var _tempValueUpdate: MotionAnimationValueObserver?
   private var _tempCompletion: (() -> Void)?
   func animate(
-    toValues:MotionAnimationValue,
+    toValues:[CGFloat],
     stiffness:CGFloat? = nil,
     damping:CGFloat? = nil,
     threshold:CGFloat? = nil,
@@ -45,56 +45,40 @@ internal class MotionAnimationPropertyState:NSObject, MotionAnimationDelegate{
     velocityUpdate:MotionAnimationVelocityObserver? = nil,
     completion:(() -> Void)? = nil) {
 
-    let anim:MultiValueAnimation
-    if let animation = animation as? MultiValueAnimation{
+    let anim:SpringValueAnimation
+    if let animation = animation as? SpringValueAnimation{
       anim = animation
       if damping != nil || stiffness != nil || threshold != nil{
-        anim.loop{ childAnimation, i in
-          if let spring = childAnimation as? SpringValueAnimation{
-            spring.damping = damping ?? spring.damping
-            spring.stiffness = stiffness ?? spring.stiffness
-            spring.threshold = threshold ?? spring.threshold
-          }
-        }
+        anim.damping = damping ?? anim.damping
+        anim.stiffness = stiffness ?? anim.stiffness
+        anim.threshold = threshold ?? anim.threshold
       }
     }else{
       animation?.stop()
-      anim = MultiValueAnimation(animationFactory: {
-        let spring = SpringValueAnimation()
-        spring.damping = damping ?? spring.damping
-        spring.stiffness = stiffness ?? spring.stiffness
-        spring.threshold = threshold ?? spring.threshold
-        return spring
-        }, getter: {
-          self.getValuesWithType(toValues.type)
-        }, setter: { newValues in
-          if let obj = self.object, keyPath = self.keyPath{
-            let value = MotionAnimationValue.valueFromCGFloatValues(newValues, withType: toValues.type)
-            obj.setValue(value.rawValue(), forKey: keyPath)
-          } else {
-            self.values = newValues
+      if let getter = getter, setter = setter {
+        anim = SpringValueAnimation(count: toValues.count, getter: getter, setter: setter)
+      } else {
+        anim = SpringValueAnimation(count: toValues.count, getter: { [weak self] newValues in
+          if let values = self?.values{
+            for i in 0..<values.count{
+              newValues[i] = values[i]
+            }
           }
-        }, target: toValues.getCGFloatValues())
+        }, setter: { [weak self] newValues in
+          self?.values = newValues
+        })
+      }
       animation = anim
     }
     _tempVelocityUpdate = velocityUpdate
     _tempValueUpdate = valueUpdate
     _tempCompletion = completion
     anim.delegate = self
-    anim.target = toValues.getCGFloatValues()
+    anim.target = toValues
   }
 
   func stop() {
     animation?.stop()
-  }
-
-  func getValuesWithType(type:MotionAnimationValueType) -> [CGFloat] {
-    if let obj = self.object, keyPath = self.keyPath{
-      let v = obj.valueForKeyPath(keyPath)!
-      return MotionAnimationValue.valueFromRawValue(v, withType: type).getCGFloatValues()
-    } else {
-      return self.values
-    }
   }
 
   func addVelocityUpdateCallback(velocityUpdateCallback:MotionAnimationVelocityObserver) -> MotionAnimationObserverKey{
@@ -127,22 +111,19 @@ internal class MotionAnimationPropertyState:NSObject, MotionAnimationDelegate{
   }
 
   internal func animationDidPerformStep(animation:MotionAnimation){
+    let animation = animation as! SpringValueAnimation
     if velocityUpdateCallbacks.count > 0 || _tempVelocityUpdate != nil{
-      let v = (animation as! MultiValueAnimation).velocity
+      let v = animation.velocity
       for (_, callback) in velocityUpdateCallbacks{
-        callback.executeWithValues(v)
+        callback(v)
       }
-      _tempVelocityUpdate?.executeWithValues(v)
+      _tempVelocityUpdate?(v)
     }
-    valueUpdated()
-  }
-
-  internal func valueUpdated(){
     for (_, callback) in valueUpdateCallbacks{
-      callback.executeWithValues(getValuesWithType(callback.valueType))
+      callback(animation.values)
     }
     if let _tempValueUpdate = _tempValueUpdate{
-      _tempValueUpdate.executeWithValues(getValuesWithType(_tempValueUpdate.valueType))
+      _tempValueUpdate(animation.values)
     }
   }
 }

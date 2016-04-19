@@ -24,8 +24,8 @@ class SquareViewController: ExampleBaseViewController {
     view.addSubview(square)
 
     // setup gesture recognizers
-    square.addGestureRecognizer(LZPanGestureRecognizer(target: self, action: "pan:"))
-    view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "tap:"))
+    square.addGestureRecognizer(LZPanGestureRecognizer(target: self, action: #selector(SquareViewController.pan(_:))))
+    view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(SquareViewController.tap(_:))))
 
     // define a custom animation property
     square.m_defineCustomProperty("xy_rotation", initialValues: [0, 0]){ newValues in
@@ -39,7 +39,7 @@ class SquareViewController: ExampleBaseViewController {
     }
     
     // when our center point changes, update our x, y rotation property
-    square.m_addVelocityUpdateCallback("center", velocityUpdateCallback: .CGPointObserver({ velocity in
+    square.m_addVelocityUpdateCallback("center", velocityUpdateCallback: CGPointObserver({ velocity in
       let maxRotate = π/2
       let rotateX = -(velocity.y/1000).clamp(-maxRotate,maxRotate)
       let rotateY = (velocity.x/1000).clamp(-maxRotate,maxRotate)
@@ -47,15 +47,15 @@ class SquareViewController: ExampleBaseViewController {
     }))
 
     // animate our view from offscreen to center of the screen
-    square.m_animate("center", to: view.center, threshold: 1)
+    square.m_animate("center", to: view.center.CGFloatValues, threshold: 1)
   }
 
   func tap(gr:UITapGestureRecognizer){
-    square.m_animate("center", to: gr.locationInView(view), stiffness:200, damping:10)
+    square.m_animate("center", to: gr.locationInView(view).CGFloatValues, stiffness:200, damping:10)
   }
 
   func pan(gr:LZPanGestureRecognizer){
     // high stiffness -> high acceleration (will help it stay under touch)
-    square.m_animate("center", to: gr.translatedViewCenterPoint, stiffness:500, damping:25)
+    square.m_animate("center", to: gr.translatedViewCenterPoint.CGFloatValues, stiffness:500, damping:25)
   }
 }

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A3B6FB591C7A310A003A4FD4 /* UIView+MotionAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B6FB581C7A310A003A4FD4 /* UIView+MotionAnimation.swift */; };
+		A32DFFB51CC6C595009A2E28 /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32DFFB41CC6C595009A2E28 /* Types.swift */; };
 		A3D92B261C6803C000C34FBD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D92B251C6803C000C34FBD /* AppDelegate.swift */; };
 		A3D92B2D1C6803C000C34FBD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3D92B2C1C6803C000C34FBD /* Assets.xcassets */; };
 		A3D92B301C6803C000C34FBD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3D92B2E1C6803C000C34FBD /* LaunchScreen.storyboard */; };
@@ -22,14 +22,13 @@
 		A3D92B641C68096900C34FBD /* NSTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D92B591C68096900C34FBD /* NSTimer.swift */; };
 		A3D92B651C68096900C34FBD /* SpringValueAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D92B5A1C68096900C34FBD /* SpringValueAnimation.swift */; };
 		A3D92B661C68096900C34FBD /* time.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D92B5B1C68096900C34FBD /* time.swift */; };
-		A3D92B671C68096900C34FBD /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D92B5C1C68096900C34FBD /* Types.swift */; };
 		A3D92B681C68096900C34FBD /* ValueAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D92B5D1C68096900C34FBD /* ValueAnimation.swift */; };
 		A3D92B6A1C68098900C34FBD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D92B691C68098900C34FBD /* ViewController.swift */; };
 		A3FC21771C680CC8008566BB /* ExampleBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FC21761C680CC8008566BB /* ExampleBaseViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A3B6FB581C7A310A003A4FD4 /* UIView+MotionAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+MotionAnimation.swift"; sourceTree = "<group>"; };
+		A32DFFB41CC6C595009A2E28 /* Types.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
 		A3D92B221C6803C000C34FBD /* MotionAnimationExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MotionAnimationExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3D92B251C6803C000C34FBD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A3D92B2C1C6803C000C34FBD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -46,7 +45,6 @@
 		A3D92B591C68096900C34FBD /* NSTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSTimer.swift; sourceTree = "<group>"; };
 		A3D92B5A1C68096900C34FBD /* SpringValueAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpringValueAnimation.swift; sourceTree = "<group>"; };
 		A3D92B5B1C68096900C34FBD /* time.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = time.swift; sourceTree = "<group>"; };
-		A3D92B5C1C68096900C34FBD /* Types.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
 		A3D92B5D1C68096900C34FBD /* ValueAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValueAnimation.swift; sourceTree = "<group>"; };
 		A3D92B691C68098900C34FBD /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		A3FC21761C680CC8008566BB /* ExampleBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleBaseViewController.swift; sourceTree = "<group>"; };
@@ -69,7 +67,9 @@
 				A3D92B241C6803C000C34FBD /* MotionAnimation */,
 				A3D92B231C6803C000C34FBD /* Products */,
 			);
+			indentWidth = 2;
 			sourceTree = "<group>";
+			tabWidth = 2;
 		};
 		A3D92B231C6803C000C34FBD /* Products */ = {
 			isa = PBXGroup;
@@ -100,11 +100,10 @@
 				A3D92B561C68096900C34FBD /* MotionAnimationPropertyState.swift */,
 				A3D92B571C68096900C34FBD /* MotionAnimator.swift */,
 				A3D92B581C68096900C34FBD /* NSObject+MotionAnimation.swift */,
-				A3B6FB581C7A310A003A4FD4 /* UIView+MotionAnimation.swift */,
 				A3D92B591C68096900C34FBD /* NSTimer.swift */,
 				A3D92B5A1C68096900C34FBD /* SpringValueAnimation.swift */,
 				A3D92B5B1C68096900C34FBD /* time.swift */,
-				A3D92B5C1C68096900C34FBD /* Types.swift */,
+				A32DFFB41CC6C595009A2E28 /* Types.swift */,
 				A3D92B5D1C68096900C34FBD /* ValueAnimation.swift */,
 			);
 			name = MotionAnimation;
@@ -205,6 +204,7 @@
 				A3FC21771C680CC8008566BB /* ExampleBaseViewController.swift in Sources */,
 				A3D92B6A1C68098900C34FBD /* ViewController.swift in Sources */,
 				A3D92B621C68096900C34FBD /* MotionAnimator.swift in Sources */,
+				A32DFFB51CC6C595009A2E28 /* Types.swift in Sources */,
 				A3D92B601C68096900C34FBD /* MotionAnimation.swift in Sources */,
 				A3D92B4F1C6803E300C34FBD /* SquareViewController.swift in Sources */,
 				A3D92B501C6803E300C34FBD /* ListViewController.swift in Sources */,
@@ -212,9 +212,7 @@
 				A3D92B611C68096900C34FBD /* MotionAnimationPropertyState.swift in Sources */,
 				A3D92B641C68096900C34FBD /* NSTimer.swift in Sources */,
 				A3D92B5E1C68096900C34FBD /* CGPoint+Util.swift in Sources */,
-				A3D92B671C68096900C34FBD /* Types.swift in Sources */,
 				A3D92B661C68096900C34FBD /* time.swift in Sources */,
-				A3B6FB591C7A310A003A4FD4 /* UIView+MotionAnimation.swift in Sources */,
 				A3D92B651C68096900C34FBD /* SpringValueAnimation.swift in Sources */,
 				A3D92B261C6803C000C34FBD /* AppDelegate.swift in Sources */,
 				A3D92B681C68096900C34FBD /* ValueAnimation.swift in Sources */,

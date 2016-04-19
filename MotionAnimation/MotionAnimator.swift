@@ -40,45 +40,28 @@ public class MotionAnimator: NSObject {
     super.init()
   }
 
-
   func update() {
+    _removeAllPendingStopAnimations()
+
     let duration = CGFloat(displayLink.duration)
-
-    sync{
-      for b in self.animations{
-        b.willUpdate()
+    for b in animations{
+      b.willUpdate()
+      if !b.update(duration){
+        pendingStopAnimations.append(b)
       }
+      b.didUpdate()
+      b.delegate?.animationDidPerformStep(b)
+      b.onUpdate?(animation: b)
     }
 
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-      sync {
-        self._removeAllPendingStopAnimations()
+    _removeAllPendingStopAnimations()
 
-        for b in self.animations{
-          if !b.update(duration){
-            self.pendingStopAnimations.append(b)
-          }
-        }
-      }
-
-      dispatch_async(dispatch_get_main_queue(), {
-        sync {
-          for b in self.animations{
-            b.didUpdate()
-            b.delegate?.animationDidPerformStep(b)
-            b.onUpdate?(animation: b)
-          }
-          self._removeAllPendingStopAnimations()
-          if self.animations.count == 0{
-            self.displayLinkPaused = true
-          }
-        }
-        for (_, o) in self.updateObservers{
-          o.animatorDidUpdate(self, dt: duration)
-        }
-      })
+    if animations.count == 0{
+      displayLinkPaused = true
     }
-
+    for (_, o) in updateObservers{
+      o.animatorDidUpdate(self, dt: duration)
+    }
   }
 
   // must be called in mutex
@@ -108,16 +91,14 @@ public class MotionAnimator: NSObject {
   }
 
   public func addAnimation(b:MotionAnimation){
-    sync {
-      if let index = self.pendingStopAnimations.indexOf(b){
-        self.pendingStopAnimations.removeAtIndex(index)
-      }
-      if self.animations.indexOf(b) == nil {
-        self.animations.append(b)
-        b.animator = self
-        if self.displayLinkPaused {
-          self.displayLinkPaused = false
-        }
+    if let index = pendingStopAnimations.indexOf(b){
+      pendingStopAnimations.removeAtIndex(index)
+    }
+    if animations.indexOf(b) == nil {
+      animations.append(b)
+      b.animator = self
+      if displayLinkPaused {
+        displayLinkPaused = false
       }
     }
   }
@@ -125,10 +106,8 @@ public class MotionAnimator: NSObject {
     return animations.indexOf(b) != nil && pendingStopAnimations.indexOf(b) == nil
   }
   public func removeAnimation(b:MotionAnimation){
-    sync {
-      if self.animations.indexOf(b) != nil {
-        self.pendingStopAnimations.append(b)
-      }
+    if animations.indexOf(b) != nil {
+      pendingStopAnimations.append(b)
     }
   }
 
@@ -136,7 +115,7 @@ public class MotionAnimator: NSObject {
     if !displayLinkPaused{
       return
     }
-    displayLink = CADisplayLink(target: self, selector: Selector("update"))
+    displayLink = CADisplayLink(target: self, selector: #selector(update))
     displayLink.addToRunLoop(NSRunLoop.mainRunLoop(), forMode: NSRunLoopCommonModes)
     printDebugMsg("displayLink started")
   }
