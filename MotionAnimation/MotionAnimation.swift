@@ -21,8 +21,8 @@ public class MotionAnimation: NSObject {
   public var onUpdate:((animation:MotionAnimation) -> Void)?
   public var willStartPlaying:(()->Void)? = nil
 
-  public var playing:Bool{
-    return MotionAnimator.sharedInstance.hasAnimation(self)
+  public var playing:Bool {
+    return animator != nil
   }
 
   override public init() {

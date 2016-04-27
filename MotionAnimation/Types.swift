@@ -57,6 +57,17 @@ extension CGRect:MotionAnimatableProperty{
   }
 }
 
+extension Double:MotionAnimatableProperty{
+    public var CGFloatValues:[CGFloat] {
+        return [CGFloat(self)]
+    }
+    public static func fromCGFloatValues(values: [CGFloat]) -> Double {
+        return Double(values[0])
+    }
+    public func toCGFloatValues(inout values: [CGFloat]) {
+        values[0] = CGFloat(self)
+    }
+}
 extension CGFloat:MotionAnimatableProperty{
   public var CGFloatValues:[CGFloat] {
     return [self]
@@ -67,6 +78,18 @@ extension CGFloat:MotionAnimatableProperty{
   public func toCGFloatValues(inout values: [CGFloat]) {
     values[0] = self
   }
+}
+
+extension Int:MotionAnimatableProperty{
+    public var CGFloatValues: [CGFloat]{
+        return CGFloat(self).CGFloatValues
+    }
+    public static func fromCGFloatValues(values: [CGFloat]) -> Int {
+        return Int(values[0])
+    }
+    public func toCGFloatValues(inout values: [CGFloat]) {
+        values[0] = CGFloat(self)
+    }
 }
 
 extension CGPoint:MotionAnimatableProperty{

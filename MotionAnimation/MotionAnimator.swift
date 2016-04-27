@@ -47,6 +47,7 @@ public class MotionAnimator: NSObject {
     for b in animations{
       b.willUpdate()
       if !b.update(duration){
+        b.animator = nil
         pendingStopAnimations.append(b)
       }
       b.didUpdate()
@@ -96,11 +97,11 @@ public class MotionAnimator: NSObject {
     }
     if animations.indexOf(b) == nil {
       animations.append(b)
-      b.animator = self
       if displayLinkPaused {
         displayLinkPaused = false
       }
     }
+    b.animator = self
   }
   public func hasAnimation(b:MotionAnimation) -> Bool{
     return animations.indexOf(b) != nil && pendingStopAnimations.indexOf(b) == nil
@@ -109,6 +110,7 @@ public class MotionAnimator: NSObject {
     if animations.indexOf(b) != nil {
       pendingStopAnimations.append(b)
     }
+    b.animator = nil
   }
 
   func start() {

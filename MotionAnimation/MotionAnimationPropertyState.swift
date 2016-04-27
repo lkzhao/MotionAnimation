@@ -48,11 +48,6 @@ internal class MotionAnimationPropertyState:NSObject, MotionAnimationDelegate{
     let anim:SpringValueAnimation
     if let animation = animation as? SpringValueAnimation{
       anim = animation
-      if damping != nil || stiffness != nil || threshold != nil{
-        anim.damping = damping ?? anim.damping
-        anim.stiffness = stiffness ?? anim.stiffness
-        anim.threshold = threshold ?? anim.threshold
-      }
     }else{
       animation?.stop()
       if let getter = getter, setter = setter {
@@ -70,6 +65,12 @@ internal class MotionAnimationPropertyState:NSObject, MotionAnimationDelegate{
       }
       animation = anim
     }
+    if damping != nil || stiffness != nil || threshold != nil{
+        anim.damping = damping ?? anim.damping
+        anim.stiffness = stiffness ?? anim.stiffness
+        anim.threshold = threshold ?? anim.threshold
+    }
+
     _tempVelocityUpdate = velocityUpdate
     _tempValueUpdate = valueUpdate
     _tempCompletion = completion
@@ -98,7 +99,12 @@ internal class MotionAnimationPropertyState:NSObject, MotionAnimationDelegate{
   }
 
   internal func setValues(values:[CGFloat]){
-    self.values = values
+    var values = values
+    if let setter = setter{
+        setter(&values)
+    } else {
+        self.values = values
+    }
   }
 
   internal func animationDidStop(animation:MotionAnimation){

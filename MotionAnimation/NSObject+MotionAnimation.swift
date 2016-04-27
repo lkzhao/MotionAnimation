@@ -49,6 +49,18 @@ extension UIView:MotionAnimationAnimatable{
       }, { [weak self] values in
         self?.center = CGPoint.fromCGFloatValues(values)
       })
+    case "alpha":
+        return ({ [weak self] values in
+              self?.alpha.toCGFloatValues(&values)
+            }, { [weak self] values in
+              self?.alpha = CGFloat.fromCGFloatValues(values)
+          })
+    case "scale", "scale.x", "scale.y", "scale.z", "rotation", "rotation.x", "rotation.y", "rotation.z", "translation.x", "translation.y", "translation.z":
+      return ({ [weak self] values in
+          self?.valueForKeyPath("layer.transform.\(key)")?.doubleValue.toCGFloatValues(&values)
+        }, { [weak self] values in
+          self?.setValue(Double.fromCGFloatValues(values), forKeyPath: "layer.transform.\(key)")
+        })
     default:
       return nil
     }
@@ -58,32 +70,17 @@ extension UIView:MotionAnimationAnimatable{
 public extension NSObject{
   private struct m_associatedKeys {
     static var m_propertyStates = "m_propertyStates_key"
-    static var m_multiValueObservers = "m_multiValueObservers_key"
   }
-  private var m_propertyStates:[String:MotionAnimationPropertyState]{
+  // use NSMutableDictionary since swift dictionary requires a O(n) dynamic cast even when using as!
+  private var m_propertyStates:NSMutableDictionary{
     get {
-      if let rtn = objc_getAssociatedObject(self, &m_associatedKeys.m_propertyStates) as? [String:MotionAnimationPropertyState]{
-        return rtn
+      // never use `as?` in this case. it is very expensive
+      let rtn = objc_getAssociatedObject(self, &m_associatedKeys.m_propertyStates)
+      if rtn != nil{
+        return rtn as! NSMutableDictionary
       }
-      self.m_propertyStates = [:]
-      return objc_getAssociatedObject(self, &m_associatedKeys.m_propertyStates) as! [String:MotionAnimationPropertyState]
-    }
-    set {
-      objc_setAssociatedObject(
-        self,
-        &m_associatedKeys.m_propertyStates,
-        newValue,
-        .OBJC_ASSOCIATION_RETAIN_NONATOMIC
-      )
-    }
-  }
-  private var m_multiValueObservers:[MotionAnimationObserverKey:MotionAnimationMultiValueObserver]{
-    get {
-      if let rtn = objc_getAssociatedObject(self, &m_associatedKeys.m_propertyStates) as? [MotionAnimationObserverKey:MotionAnimationMultiValueObserver]{
-        return rtn
-      }
-      self.m_propertyStates = [:]
-      return objc_getAssociatedObject(self, &m_associatedKeys.m_propertyStates) as! [MotionAnimationObserverKey:MotionAnimationMultiValueObserver]
+      self.m_propertyStates = NSMutableDictionary()
+      return objc_getAssociatedObject(self, &m_associatedKeys.m_propertyStates) as! NSMutableDictionary
     }
     set {
       objc_setAssociatedObject(
@@ -103,7 +100,7 @@ public extension NSObject{
         fatalError("\(key) is not animatable, you can define customAnimation property via m_defineCustomProperty or conform to MotionAnimationAnimatable")
       }
     }
-    return m_propertyStates[key]!
+    return m_propertyStates[key] as! MotionAnimationPropertyState
   }
   
   // define custom animatable property
@@ -116,6 +113,12 @@ public extension NSObject{
     }
     m_propertyStates[key] = MotionAnimationPropertyState(values: initialValues)
     getPropertyState(key).addValueUpdateCallback(valueUpdateCallback)
+  }
+  func m_defineCustomProperty(key:String, getter:CGFloatValueBlock, setter:CGFloatValueBlock){
+    if m_propertyStates[key] != nil{
+      return
+    }
+    m_propertyStates[key] = MotionAnimationPropertyState(getter: getter, setter: setter)
   }
   func m_removeAnimationForKey(key:String){
     getPropertyState(key).stop()
@@ -169,13 +172,13 @@ public extension NSObject{
 
   func m_animate(
     key:String,
-    to:[CGFloat],
+    to:MotionAnimatableProperty,
     stiffness:CGFloat? = nil,
     damping:CGFloat? = nil,
     threshold:CGFloat? = nil,
     valueUpdate:MotionAnimationValueObserver? = nil,
     velocityUpdate:MotionAnimationVelocityObserver? = nil,
     completion:(() -> Void)? = nil) {
-    getPropertyState(key).animate(to, stiffness: stiffness, damping: damping, threshold: threshold, valueUpdate:valueUpdate, velocityUpdate:velocityUpdate, completion: completion)
+    getPropertyState(key).animate(to.CGFloatValues, stiffness: stiffness, damping: damping, threshold: threshold, valueUpdate:valueUpdate, velocityUpdate:velocityUpdate, completion: completion)
   }
 }
