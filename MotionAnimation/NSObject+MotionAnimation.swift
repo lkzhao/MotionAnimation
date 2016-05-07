@@ -43,6 +43,12 @@ public protocol MotionAnimationAnimatable {
 extension UIView:MotionAnimationAnimatable{
   public func defaultGetterAndSetterForKey(key: String) -> (CGFloatValueBlock, CGFloatValueBlock)? {
     switch key {
+    case "bounds":
+      return ({ [weak self] values in
+        self?.bounds.toCGFloatValues(&values)
+      }, { [weak self] values in
+        self?.bounds = CGRect.fromCGFloatValues(values)
+      })
     case "center":
       return ({ [weak self] values in
         self?.center.toCGFloatValues(&values)
