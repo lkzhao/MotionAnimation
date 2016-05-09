@@ -113,11 +113,11 @@ public extension NSObject{
   func m_setValues(values:[CGFloat], forCustomProperty key:String){
     getPropertyState(key).setValues(values)
   }
-  func m_defineCustomProperty(key:String, initialValues:[CGFloat], valueUpdateCallback:MotionAnimationValueObserver){
+  func m_defineCustomProperty(key:String, initialValues:MotionAnimatableProperty, valueUpdateCallback:MotionAnimationValueObserver){
     if m_propertyStates[key] != nil{
       return
     }
-    m_propertyStates[key] = MotionAnimationPropertyState(values: initialValues)
+    m_propertyStates[key] = MotionAnimationPropertyState(values: initialValues.CGFloatValues)
     getPropertyState(key).addValueUpdateCallback(valueUpdateCallback)
   }
   func m_defineCustomProperty(key:String, getter:CGFloatValueBlock, setter:CGFloatValueBlock){

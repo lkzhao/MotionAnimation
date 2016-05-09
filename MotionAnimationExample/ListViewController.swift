@@ -36,7 +36,7 @@ class ListViewController: ExampleBaseViewController {
       // link this item's center point to the previous item's center point
       if lastListItem != nil{
         lastListItem.m_addValueUpdateCallback("center", valueUpdateCallback: CGPointObserver({ point in
-          v.m_animate("center", to: CGPointMake(point.x, v.center.y).CGFloatValues, stiffness: 200, damping:15)
+          v.m_animate("center", to: CGPointMake(point.x, v.center.y), stiffness: 200, damping:15)
         }))
       }
       lastListItem = v
@@ -44,17 +44,17 @@ class ListViewController: ExampleBaseViewController {
     
     // animate our first item in to the view
     // since the rest of the items are linked, they will follow as well
-    listItems.first?.m_animate("center", to: CGPointMake(view.center.x, 150).CGFloatValues, stiffness: 200, damping:15, threshold:1)
+    listItems.first?.m_animate("center", to: CGPointMake(view.center.x, 150), stiffness: 200, damping:15, threshold:1)
   }
   
   func pan(gr:LZPanGestureRecognizer){
     switch gr.state{
     case .Began, .Changed:
       // move the item under touch
-      gr.view!.m_animate("center", to: gr.translatedViewCenterPoint.CGFloatValues, stiffness: 500, damping:25)
+      gr.view!.m_animate("center", to: gr.translatedViewCenterPoint, stiffness: 500, damping:25)
     default:
       // reset the item to the center
-      gr.view!.m_animate("center", to: CGPointMake(view.center.x, gr.view!.center.y).CGFloatValues, stiffness: 200, damping:15)
+      gr.view!.m_animate("center", to: CGPointMake(view.center.x, gr.view!.center.y), stiffness: 200, damping:15)
     }
   }
 }

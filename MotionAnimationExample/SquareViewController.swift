@@ -28,13 +28,14 @@ class SquareViewController: ExampleBaseViewController {
     view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(SquareViewController.tap(_:))))
 
     // define a custom animation property
-    square.m_defineCustomProperty("xy_rotation", initialValues: [0, 0]){ newValues in
+    square.m_defineCustomProperty("xy_rotation", initialValues: CGPointZero){ newValues in
+      let pointValue = CGPoint.fromCGFloatValues(newValues)
       var t = CATransform3DIdentity
       t.m34 = 1.0 / -500;
-      t = CATransform3DRotate(t, newValues[0], 1.0, 0, 0)
-      t = CATransform3DRotate(t, newValues[1], 0, 1.0, 0)
+      t = CATransform3DRotate(t, pointValue.x, 1.0, 0, 0)
+      t = CATransform3DRotate(t, pointValue.y, 0, 1.0, 0)
       self.square.layer.transform = t
-      let k = Float((abs(newValues[0]) + abs(newValues[1])) / π / 1.5)
+      let k = Float((abs(newValues[0]) + abs(pointValue.y)) / π / 1.5)
       self.square.layer.opacity = 1 - k
     }
     
@@ -43,19 +44,19 @@ class SquareViewController: ExampleBaseViewController {
       let maxRotate = π/2
       let rotateX = -(velocity.y/1000).clamp(-maxRotate,maxRotate)
       let rotateY = (velocity.x/1000).clamp(-maxRotate,maxRotate)
-      self.square.m_animate("xy_rotation", to:[rotateX, rotateY], stiffness: 120, damping: 20, threshold: 0.001)
+      self.square.m_animate("xy_rotation", to:CGPointMake(rotateX, rotateY), stiffness: 120, damping: 20, threshold: 0.001)
     }))
 
     // animate our view from offscreen to center of the screen
-    square.m_animate("center", to: view.center.CGFloatValues, threshold: 1)
+    square.m_animate("center", to: view.center, threshold: 1)
   }
 
   func tap(gr:UITapGestureRecognizer){
-    square.m_animate("center", to: gr.locationInView(view).CGFloatValues, stiffness:200, damping:10)
+    square.m_animate("center", to: gr.locationInView(view), stiffness:200, damping:10)
   }
 
   func pan(gr:LZPanGestureRecognizer){
     // high stiffness -> high acceleration (will help it stay under touch)
-    square.m_animate("center", to: gr.translatedViewCenterPoint.CGFloatValues, stiffness:500, damping:25)
+    square.m_animate("center", to: gr.translatedViewCenterPoint, stiffness:500, damping:25)
   }
 }
