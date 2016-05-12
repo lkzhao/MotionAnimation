@@ -27,7 +27,7 @@ class ListViewController: ExampleBaseViewController {
       listItems.append(v)
       
       // setup gesture recognizer on this item
-      let gr = LZPanGestureRecognizer(target: self, action: "pan:")
+      let gr = LZPanGestureRecognizer(target: self, action: #selector(pan))
       gr.xRange = 100...view.frame.width-100
       gr.yRange = v.center.y...v.center.y
       gr.yOverflowScale = 0
@@ -35,9 +35,9 @@ class ListViewController: ExampleBaseViewController {
       
       // link this item's center point to the previous item's center point
       if lastListItem != nil{
-        lastListItem.m_addValueUpdateCallback("center", valueUpdateCallback: CGPointObserver({ point in
+        lastListItem.m_addValueUpdateCallback("center", valueUpdateCallback: { (point:CGPoint) in
           v.m_animate("center", to: CGPointMake(point.x, v.center.y), stiffness: 200, damping:15)
-        }))
+        })
       }
       lastListItem = v
     }

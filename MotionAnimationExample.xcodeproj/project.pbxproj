@@ -13,18 +13,16 @@
 		A3D92B301C6803C000C34FBD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3D92B2E1C6803C000C34FBD /* LaunchScreen.storyboard */; };
 		A3D92B4F1C6803E300C34FBD /* SquareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D92B4D1C6803E300C34FBD /* SquareViewController.swift */; };
 		A3D92B501C6803E300C34FBD /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D92B4E1C6803E300C34FBD /* ListViewController.swift */; };
-		A3D92B5E1C68096900C34FBD /* CGPoint+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D92B531C68096900C34FBD /* CGPoint+Util.swift */; };
-		A3D92B5F1C68096900C34FBD /* LZPanGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D92B541C68096900C34FBD /* LZPanGestureRecognizer.swift */; };
 		A3D92B601C68096900C34FBD /* MotionAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D92B551C68096900C34FBD /* MotionAnimation.swift */; };
 		A3D92B611C68096900C34FBD /* MotionAnimationPropertyState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D92B561C68096900C34FBD /* MotionAnimationPropertyState.swift */; };
 		A3D92B621C68096900C34FBD /* MotionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D92B571C68096900C34FBD /* MotionAnimator.swift */; };
 		A3D92B631C68096900C34FBD /* NSObject+MotionAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D92B581C68096900C34FBD /* NSObject+MotionAnimation.swift */; };
-		A3D92B641C68096900C34FBD /* NSTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D92B591C68096900C34FBD /* NSTimer.swift */; };
 		A3D92B651C68096900C34FBD /* SpringValueAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D92B5A1C68096900C34FBD /* SpringValueAnimation.swift */; };
-		A3D92B661C68096900C34FBD /* time.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D92B5B1C68096900C34FBD /* time.swift */; };
 		A3D92B681C68096900C34FBD /* ValueAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D92B5D1C68096900C34FBD /* ValueAnimation.swift */; };
 		A3D92B6A1C68098900C34FBD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D92B691C68098900C34FBD /* ViewController.swift */; };
 		A3FC21771C680CC8008566BB /* ExampleBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FC21761C680CC8008566BB /* ExampleBaseViewController.swift */; };
+		B19E31681CE4BF9E00CE8CE9 /* CGPoint+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19E31661CE4BF9E00CE8CE9 /* CGPoint+Util.swift */; };
+		B19E31691CE4BF9E00CE8CE9 /* LZPanGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19E31671CE4BF9E00CE8CE9 /* LZPanGestureRecognizer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,18 +34,16 @@
 		A3D92B311C6803C000C34FBD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A3D92B4D1C6803E300C34FBD /* SquareViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SquareViewController.swift; sourceTree = "<group>"; };
 		A3D92B4E1C6803E300C34FBD /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
-		A3D92B531C68096900C34FBD /* CGPoint+Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+Util.swift"; sourceTree = "<group>"; };
-		A3D92B541C68096900C34FBD /* LZPanGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LZPanGestureRecognizer.swift; sourceTree = "<group>"; };
 		A3D92B551C68096900C34FBD /* MotionAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionAnimation.swift; sourceTree = "<group>"; };
 		A3D92B561C68096900C34FBD /* MotionAnimationPropertyState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionAnimationPropertyState.swift; sourceTree = "<group>"; };
 		A3D92B571C68096900C34FBD /* MotionAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionAnimator.swift; sourceTree = "<group>"; };
 		A3D92B581C68096900C34FBD /* NSObject+MotionAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSObject+MotionAnimation.swift"; sourceTree = "<group>"; };
-		A3D92B591C68096900C34FBD /* NSTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSTimer.swift; sourceTree = "<group>"; };
 		A3D92B5A1C68096900C34FBD /* SpringValueAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpringValueAnimation.swift; sourceTree = "<group>"; };
-		A3D92B5B1C68096900C34FBD /* time.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = time.swift; sourceTree = "<group>"; };
 		A3D92B5D1C68096900C34FBD /* ValueAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValueAnimation.swift; sourceTree = "<group>"; };
 		A3D92B691C68098900C34FBD /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		A3FC21761C680CC8008566BB /* ExampleBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleBaseViewController.swift; sourceTree = "<group>"; };
+		B19E31661CE4BF9E00CE8CE9 /* CGPoint+Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+Util.swift"; sourceTree = "<group>"; };
+		B19E31671CE4BF9E00CE8CE9 /* LZPanGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LZPanGestureRecognizer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,8 +79,8 @@
 			isa = PBXGroup;
 			children = (
 				A3D92B521C68096900C34FBD /* MotionAnimation */,
-				A3FC21741C680C3E008566BB /* Support Files */,
 				A3FC21751C680C74008566BB /* Examples */,
+				A3FC21741C680C3E008566BB /* Support Files */,
 				A3D92B691C68098900C34FBD /* ViewController.swift */,
 			);
 			name = MotionAnimation;
@@ -94,17 +90,13 @@
 		A3D92B521C68096900C34FBD /* MotionAnimation */ = {
 			isa = PBXGroup;
 			children = (
-				A3D92B531C68096900C34FBD /* CGPoint+Util.swift */,
-				A3D92B541C68096900C34FBD /* LZPanGestureRecognizer.swift */,
-				A3D92B551C68096900C34FBD /* MotionAnimation.swift */,
-				A3D92B561C68096900C34FBD /* MotionAnimationPropertyState.swift */,
 				A3D92B571C68096900C34FBD /* MotionAnimator.swift */,
+				A3D92B561C68096900C34FBD /* MotionAnimationPropertyState.swift */,
 				A3D92B581C68096900C34FBD /* NSObject+MotionAnimation.swift */,
-				A3D92B591C68096900C34FBD /* NSTimer.swift */,
-				A3D92B5A1C68096900C34FBD /* SpringValueAnimation.swift */,
-				A3D92B5B1C68096900C34FBD /* time.swift */,
-				A32DFFB41CC6C595009A2E28 /* Types.swift */,
+				A3D92B551C68096900C34FBD /* MotionAnimation.swift */,
 				A3D92B5D1C68096900C34FBD /* ValueAnimation.swift */,
+				A3D92B5A1C68096900C34FBD /* SpringValueAnimation.swift */,
+				A32DFFB41CC6C595009A2E28 /* Types.swift */,
 			);
 			name = MotionAnimation;
 			path = ../MotionAnimation;
@@ -124,6 +116,8 @@
 		A3FC21751C680C74008566BB /* Examples */ = {
 			isa = PBXGroup;
 			children = (
+				B19E31661CE4BF9E00CE8CE9 /* CGPoint+Util.swift */,
+				B19E31671CE4BF9E00CE8CE9 /* LZPanGestureRecognizer.swift */,
 				A3D92B4D1C6803E300C34FBD /* SquareViewController.swift */,
 				A3D92B4E1C6803E300C34FBD /* ListViewController.swift */,
 				A3FC21761C680CC8008566BB /* ExampleBaseViewController.swift */,
@@ -204,19 +198,17 @@
 				A3FC21771C680CC8008566BB /* ExampleBaseViewController.swift in Sources */,
 				A3D92B6A1C68098900C34FBD /* ViewController.swift in Sources */,
 				A3D92B621C68096900C34FBD /* MotionAnimator.swift in Sources */,
+				B19E31691CE4BF9E00CE8CE9 /* LZPanGestureRecognizer.swift in Sources */,
 				A32DFFB51CC6C595009A2E28 /* Types.swift in Sources */,
 				A3D92B601C68096900C34FBD /* MotionAnimation.swift in Sources */,
 				A3D92B4F1C6803E300C34FBD /* SquareViewController.swift in Sources */,
 				A3D92B501C6803E300C34FBD /* ListViewController.swift in Sources */,
 				A3D92B631C68096900C34FBD /* NSObject+MotionAnimation.swift in Sources */,
 				A3D92B611C68096900C34FBD /* MotionAnimationPropertyState.swift in Sources */,
-				A3D92B641C68096900C34FBD /* NSTimer.swift in Sources */,
-				A3D92B5E1C68096900C34FBD /* CGPoint+Util.swift in Sources */,
-				A3D92B661C68096900C34FBD /* time.swift in Sources */,
 				A3D92B651C68096900C34FBD /* SpringValueAnimation.swift in Sources */,
 				A3D92B261C6803C000C34FBD /* AppDelegate.swift in Sources */,
+				B19E31681CE4BF9E00CE8CE9 /* CGPoint+Util.swift in Sources */,
 				A3D92B681C68096900C34FBD /* ValueAnimation.swift in Sources */,
-				A3D92B5F1C68096900C34FBD /* LZPanGestureRecognizer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
