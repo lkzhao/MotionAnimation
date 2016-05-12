@@ -15,6 +15,13 @@ public protocol MotionAnimationAnimatable {
   func defaultGetterAndSetterForKey(key:String) -> (CGFloatValueBlock, CGFloatValueBlock)?
 }
 
+class Weak<T: AnyObject> {
+  weak var value : T?
+  init (value: T) {
+    self.value = value
+  }
+}
+
 extension UIView:MotionAnimationAnimatable{
   public func defaultGetterAndSetterForKey(key: String) -> (CGFloatValueBlock, CGFloatValueBlock)? {
     switch key {

@@ -7,9 +7,14 @@
 //
 
 import UIKit
+@objc
+public protocol MotionAnimatorObserver{
+  func animatorDidUpdate(animator:MotionAnimator, dt:CGFloat)
+}
 
 public class MotionAnimator: NSObject {
   public static let sharedInstance = MotionAnimator()
+  var updateObservers:[MotionAnimationObserverKey:Weak<MotionAnimatorObserver>] = [:]
 
   public var debugEnabled = false
   var displayLinkPaused:Bool{
@@ -48,6 +53,9 @@ public class MotionAnimator: NSObject {
     if animations.count == 0{
       displayLinkPaused = true
     }
+    for (_, o) in updateObservers{
+      o.value?.animatorDidUpdate(self, dt: duration)
+    }
   }
 
   // must be called in mutex
@@ -60,6 +68,20 @@ public class MotionAnimator: NSObject {
       }
     }
     pendingStopAnimations.removeAll()
+  }
+
+  public func addUpdateObserver(observer:MotionAnimatorObserver) -> MotionAnimationObserverKey {
+    let key = NSUUID()
+    updateObservers[key] = Weak(value: observer)
+    return key
+  }
+
+  public func observerWithKey(observerKey:MotionAnimationObserverKey) -> MotionAnimatorObserver? {
+    return updateObservers[observerKey]?.value
+  }
+
+  public func removeUpdateObserverWithKey(observerKey:MotionAnimationObserverKey) {
+    updateObservers.removeValueForKey(observerKey)
   }
 
   public func addAnimation(b:MotionAnimation){
