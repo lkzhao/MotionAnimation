@@ -38,8 +38,6 @@ public class SpringValueAnimation:ValueAnimation {
         running = true
       }
     }
-    
-    print(dt)
     return running
   }
 }
