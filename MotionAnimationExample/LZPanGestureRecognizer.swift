@@ -16,33 +16,33 @@ public class LZPanGestureRecognizer: UIPanGestureRecognizer {
   
   public var translatedViewCenterPoint:CGPoint{
     if let startViewCenterPoint = startViewCenterPoint{
-      var p = startViewCenterPoint + translationInView(self.view!.superview!)
+      var p = startViewCenterPoint + translation(in: self.view!.superview!)
       p.x = clamp(p.x, range:xRange, overflowScale:xOverflowScale)
       p.y = clamp(p.y, range:yRange, overflowScale:yOverflowScale)
       return p
     }else{
-      return self.view?.center ?? CGPointZero
+      return self.view?.center ?? CGPoint.zero
     }
   }
 
-  public func clamp(element: CGFloat, range:ClosedInterval<CGFloat>, overflowScale:CGFloat = 0) -> CGFloat {
-    if element < range.start{
-      return range.start - (range.start - element)*overflowScale
-    } else if element > range.end{
-      return range.end + (element - range.end)*overflowScale
+  public func clamp(_ element: CGFloat, range:ClosedRange<CGFloat>, overflowScale:CGFloat = 0) -> CGFloat {
+    if element < range.lowerBound{
+      return range.lowerBound - (range.lowerBound - element)*overflowScale
+    } else if element > range.upperBound{
+      return range.upperBound + (element - range.upperBound)*overflowScale
     }
     return element
   }
 
   public var xOverflowScale:CGFloat = 0.3
   public var yOverflowScale:CGFloat = 0.3
-  public var xRange:ClosedInterval<CGFloat> = CGFloat.min...CGFloat.max
-  public var yRange:ClosedInterval<CGFloat> = CGFloat.min...CGFloat.max
+  public var xRange:ClosedRange<CGFloat> = CGFloat.leastNormalMagnitude...CGFloat.greatestFiniteMagnitude
+  public var yRange:ClosedRange<CGFloat> = CGFloat.leastNormalMagnitude...CGFloat.greatestFiniteMagnitude
   
-  override public func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent) {
-    super.touchesBegan(touches, withEvent: event)
+  override public func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
+    super.touchesBegan(touches, with: event)
     
-    if state == .Failed{
+    if state == .failed{
       return
     }
 

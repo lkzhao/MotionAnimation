@@ -157,6 +157,9 @@
 				TargetAttributes = {
 					A3D92B211C6803C000C34FBD = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = 4VSEW78TKT;
+						DevelopmentTeamName = "Yi Lun Zhao";
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -317,6 +320,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lkzhao.MotionAnimation;
 				PRODUCT_NAME = MotionAnimationExample;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -328,6 +332,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lkzhao.MotionAnimation;
 				PRODUCT_NAME = MotionAnimationExample;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

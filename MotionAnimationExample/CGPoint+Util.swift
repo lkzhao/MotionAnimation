@@ -9,41 +9,41 @@
 import UIKit
 
 extension CGFloat{
-  func clamp(a:CGFloat, _ b:CGFloat) -> CGFloat{
+  func clamp(_ a:CGFloat, _ b:CGFloat) -> CGFloat{
     return self < a ? a : (self > b ? b : self)
   }
 }
 extension CGPoint{
-  func translate(dx:CGFloat, dy:CGFloat) -> CGPoint{
-    return CGPointMake(self.x+dx, self.y+dy)
+  func translate(_ dx:CGFloat, dy:CGFloat) -> CGPoint{
+    return CGPoint(x: self.x+dx, y: self.y+dy)
   }
   
-  func transform(t:CGAffineTransform) -> CGPoint{
-    return CGPointApplyAffineTransform(self, t)
+  func transform(_ t:CGAffineTransform) -> CGPoint{
+    return self.apply(transform: t)
   }
   
-  func distance(b:CGPoint)->CGFloat{
+  func distance(_ b:CGPoint)->CGFloat{
     return sqrt(pow(self.x-b.x,2)+pow(self.y-b.y,2));
   }
 }
 func +(left: CGPoint, right: CGPoint) -> CGPoint {
-  return CGPointMake(left.x + right.x, left.y + right.y)
+  return CGPoint(x: left.x + right.x, y: left.y + right.y)
 }
 func -(left: CGPoint, right: CGPoint) -> CGPoint {
-  return CGPointMake(left.x - right.x, left.y - right.y)
+  return CGPoint(x: left.x - right.x, y: left.y - right.y)
 }
 func /(left: CGPoint, right: CGFloat) -> CGPoint {
-  return CGPointMake(left.x/right, left.y/right)
+  return CGPoint(x: left.x/right, y: left.y/right)
 }
 func *(left: CGPoint, right: CGFloat) -> CGPoint {
-  return CGPointMake(left.x*right, left.y*right)
+  return CGPoint(x: left.x*right, y: left.y*right)
 }
 func *(left: CGFloat, right: CGPoint) -> CGPoint {
   return right * left
 }
 func *(left: CGPoint, right: CGPoint) -> CGPoint {
-  return CGPointMake(left.x*right.x, left.y*right.y)
+  return CGPoint(x: left.x*right.x, y: left.y*right.y)
 }
 prefix func -(point:CGPoint) -> CGPoint {
-  return CGPointZero - point
+  return CGPoint.zero - point
 }

@@ -13,9 +13,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   var window: UIWindow?
 
-  func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-    window = UIWindow(frame: UIScreen.mainScreen().bounds)
-    window!.rootViewController = ViewController(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
+  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    window = UIWindow(frame: UIScreen.main().bounds)
+    window!.rootViewController = ViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
 //    window!.rootViewController = SquareViewController()
     window!.makeKeyAndVisible()
     return true

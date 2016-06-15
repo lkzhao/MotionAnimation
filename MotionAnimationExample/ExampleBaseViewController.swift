@@ -14,15 +14,15 @@ class ExampleBaseViewController: UIViewController {
     super.viewDidLoad()
     view.backgroundColor = UIColor(red: 0, green: 190/255, blue: 1.0, alpha: 1)
     
-    let label = UILabel(frame: CGRectZero)
+    let label = UILabel(frame: CGRect.zero)
     label.text = "\(self.dynamicType)"
     label.sizeToFit()
-    label.textColor = UIColor.whiteColor()
+    label.textColor = UIColor.white()
     view.addSubview(label)
-    label.center = CGPointMake(view.center.x, 40)
+    label.center = CGPoint(x: view.center.x, y: 40)
   }
   
   override func preferredStatusBarStyle() -> UIStatusBarStyle {
-    return .LightContent
+    return .lightContent
   }
 }
