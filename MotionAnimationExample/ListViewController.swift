@@ -22,7 +22,7 @@ class ListViewController: ExampleBaseViewController {
       let v = UIView(frame: CGRect(origin: CGPoint.zero, size: size))
       v.center = CGPoint(x: view.center.x, y: 150 + CGFloat(i)*60)
       v.layer.cornerRadius = 5
-      v.backgroundColor = UIColor.white()
+      v.backgroundColor = UIColor.white
       view.addSubview(v)
       listItems.append(v)
       
@@ -35,7 +35,7 @@ class ListViewController: ExampleBaseViewController {
       
       // link this item's center point to the previous item's center point
       if lastListItem != nil{
-        lastListItem.m_addValueUpdateCallback("center", valueUpdateCallback: { (point:CGPoint) in
+        let _ = lastListItem.m_addValueUpdateCallback("center", valueUpdateCallback: { (point:CGPoint) in
           v.m_animate("center", to: CGPoint(x: point.x, y: v.center.y), stiffness: 200, damping:15)
         })
       }

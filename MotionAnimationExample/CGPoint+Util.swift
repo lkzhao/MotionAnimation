@@ -19,7 +19,7 @@ extension CGPoint{
   }
   
   func transform(_ t:CGAffineTransform) -> CGPoint{
-    return self.apply(transform: t)
+    return self.applying(t)
   }
   
   func distance(_ b:CGPoint)->CGFloat{

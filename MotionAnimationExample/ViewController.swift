@@ -20,7 +20,7 @@ class ViewController: UIPageViewController {
     self.setViewControllers([vcs[0]], direction: UIPageViewControllerNavigationDirection.forward, animated: true, completion: nil)
   }
   
-  override func preferredStatusBarStyle() -> UIStatusBarStyle {
+  override var preferredStatusBarStyle: UIStatusBarStyle {
     return .lightContent
   }
 }

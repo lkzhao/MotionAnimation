@@ -20,7 +20,7 @@ class SquareViewController: ExampleBaseViewController {
     // configure our white square
     square = UIView(frame: CGRect(x: -150,y: view.center.y-75,width: 150,height: 150))
     square.layer.cornerRadius = 10
-    square.backgroundColor = UIColor.white()
+    square.backgroundColor = UIColor.white
     view.addSubview(square)
 
     // define a custom animation property
@@ -56,7 +56,7 @@ class SquareViewController: ExampleBaseViewController {
   var isBig = false
   func doubleTap(_ gr:UITapGestureRecognizer){
     let newSize = isBig ? CGSize(width: 150, height: 150) : CGSize(width: 200, height: 200)
-    let newColor = isBig ? UIColor.white() : UIColor.black()
+    let newColor = isBig ? UIColor.white : UIColor.black
     isBig = !isBig
     square.m_animate("backgroundColor", to: newColor, stiffness:200, damping:10)
     square.m_animate("bounds", to: CGRect(origin: CGPoint.zero, size: newSize), stiffness:200, damping:10)

@@ -10,7 +10,7 @@ import UIKit
 
 public typealias CGFloatValueBlock = ((inout [CGFloat]) -> Void)
 
-public class ValueAnimation:MotionAnimation {
+open class ValueAnimation:MotionAnimation {
   private var getter:CGFloatValueBlock
   private var setter:CGFloatValueBlock
   public var velocity:[CGFloat]
