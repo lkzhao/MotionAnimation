@@ -48,7 +48,13 @@ extension UIView:MotionAnimationAnimatable{
         self?.alpha.toCGFloatValues(&values)
         }, { [weak self] values in
           self?.alpha = CGFloat.fromCGFloatValues(values)
-        })
+      })
+    case "zPosition":
+      return ({ [weak self] values in
+        self?.layer.zPosition.toCGFloatValues(&values)
+      }, { [weak self] values in
+        self?.layer.zPosition = CGFloat.fromCGFloatValues(values)
+      })
     case "scale", "scale.x", "scale.y", "scale.z", "rotation", "rotation.x", "rotation.y", "rotation.z", "translation.x", "translation.y", "translation.z":
       return ({ [weak self] values in
         (self?.value(forKeyPath: "layer.transform.\(key)") as! NSNumber).doubleValue.toCGFloatValues(&values)
